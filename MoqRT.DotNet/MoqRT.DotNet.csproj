@@ -1,0 +1,989 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2E4DF86D-BA27-4C09-A10D-3AF5F18C2D88}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MoqRT.DotNet</RootNamespace>
+    <AssemblyName>MoqRT.DotNet</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\AbstractInvocation.cs">
+      <Link>Castle\AbstractInvocation.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\AllMethodsHook.cs">
+      <Link>Castle\AllMethodsHook.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\ClassMembersCollector.cs">
+      <Link>Castle\Contributors\ClassMembersCollector.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\ClassProxyInstanceContributor.cs">
+      <Link>Castle\Contributors\ClassProxyInstanceContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\ClassProxyTargetContributor.cs">
+      <Link>Castle\Contributors\ClassProxyTargetContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\ClassProxyWithTargetTargetContributor.cs">
+      <Link>Castle\Contributors\ClassProxyWithTargetTargetContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\CompositeTypeContributor.cs">
+      <Link>Castle\Contributors\CompositeTypeContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\DelegateProxyTargetContributor.cs">
+      <Link>Castle\Contributors\DelegateProxyTargetContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\Delegates.cs">
+      <Link>Castle\Contributors\Delegates.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\DelegateTypeGenerator.cs">
+      <Link>Castle\Contributors\DelegateTypeGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\ForwardingMethodGenerator.cs">
+      <Link>Castle\Contributors\ForwardingMethodGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\InterfaceMembersCollector.cs">
+      <Link>Castle\Contributors\InterfaceMembersCollector.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\InterfaceMembersOnClassCollector.cs">
+      <Link>Castle\Contributors\InterfaceMembersOnClassCollector.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\InterfaceProxyInstanceContributor.cs">
+      <Link>Castle\Contributors\InterfaceProxyInstanceContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\InterfaceProxyTargetContributor.cs">
+      <Link>Castle\Contributors\InterfaceProxyTargetContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\InterfaceProxyWithOptionalTargetContributor.cs">
+      <Link>Castle\Contributors\InterfaceProxyWithOptionalTargetContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\InterfaceProxyWithoutTargetContributor.cs">
+      <Link>Castle\Contributors\InterfaceProxyWithoutTargetContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\InterfaceProxyWithTargetInterfaceTargetContributor.cs">
+      <Link>Castle\Contributors\InterfaceProxyWithTargetInterfaceTargetContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\InvocationWithDelegateContributor.cs">
+      <Link>Castle\Contributors\InvocationWithDelegateContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\InvocationWithGenericDelegateContributor.cs">
+      <Link>Castle\Contributors\InvocationWithGenericDelegateContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\ITypeContributor.cs">
+      <Link>Castle\Contributors\ITypeContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\MembersCollector.cs">
+      <Link>Castle\Contributors\MembersCollector.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\MinimialisticMethodGenerator.cs">
+      <Link>Castle\Contributors\MinimialisticMethodGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\MixinContributor.cs">
+      <Link>Castle\Contributors\MixinContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\OptionallyForwardingMethodGenerator.cs">
+      <Link>Castle\Contributors\OptionallyForwardingMethodGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\ProxyInstanceContributor.cs">
+      <Link>Castle\Contributors\ProxyInstanceContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Contributors\WrappedClassMembersCollector.cs">
+      <Link>Castle\Contributors\WrappedClassMembersCollector.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\DefaultProxyBuilder.cs">
+      <Link>Castle\DefaultProxyBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\AttributeDisassembler.cs">
+      <Link>Castle\Generators\AttributeDisassembler.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\AttributesToAvoidReplicating.cs">
+      <Link>Castle\Generators\AttributesToAvoidReplicating.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\BaseProxyGenerator.cs">
+      <Link>Castle\Generators\BaseProxyGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\CacheKey.cs">
+      <Link>Castle\Generators\CacheKey.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\ClassProxyGenerator.cs">
+      <Link>Castle\Generators\ClassProxyGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\ClassProxyWithTargetGenerator.cs">
+      <Link>Castle\Generators\ClassProxyWithTargetGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\CompositionInvocationTypeGenerator.cs">
+      <Link>Castle\Generators\CompositionInvocationTypeGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\DelegateMembersCollector.cs">
+      <Link>Castle\Generators\DelegateMembersCollector.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\DelegateProxyGenerationHook.cs">
+      <Link>Castle\Generators\DelegateProxyGenerationHook.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\DelegateProxyGenerator.cs">
+      <Link>Castle\Generators\DelegateProxyGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\AbstractTypeEmitter.cs">
+      <Link>Castle\Generators\Emitters\AbstractTypeEmitter.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\ArgumentsUtil.cs">
+      <Link>Castle\Generators\Emitters\ArgumentsUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\ClassEmitter.cs">
+      <Link>Castle\Generators\Emitters\ClassEmitter.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\CodeBuilders\AbstractCodeBuilder.cs">
+      <Link>Castle\Generators\Emitters\CodeBuilders\AbstractCodeBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\CodeBuilders\ConstructorCodeBuilder.cs">
+      <Link>Castle\Generators\Emitters\CodeBuilders\ConstructorCodeBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\CodeBuilders\MethodCodeBuilder.cs">
+      <Link>Castle\Generators\Emitters\CodeBuilders\MethodCodeBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\ConstructorCollection.cs">
+      <Link>Castle\Generators\Emitters\ConstructorCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\ConstructorEmitter.cs">
+      <Link>Castle\Generators\Emitters\ConstructorEmitter.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\EventCollection.cs">
+      <Link>Castle\Generators\Emitters\EventCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\EventEmitter.cs">
+      <Link>Castle\Generators\Emitters\EventEmitter.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\GenericUtil.cs">
+      <Link>Castle\Generators\Emitters\GenericUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\IMemberEmitter.cs">
+      <Link>Castle\Generators\Emitters\IMemberEmitter.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\LdcOpCodesDictionary.cs">
+      <Link>Castle\Generators\Emitters\LdcOpCodesDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\LdindOpCodesDictionary.cs">
+      <Link>Castle\Generators\Emitters\LdindOpCodesDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\MethodCollection.cs">
+      <Link>Castle\Generators\Emitters\MethodCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\MethodEmitter.cs">
+      <Link>Castle\Generators\Emitters\MethodEmitter.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\NestedClassCollection.cs">
+      <Link>Castle\Generators\Emitters\NestedClassCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\NestedClassEmitter.cs">
+      <Link>Castle\Generators\Emitters\NestedClassEmitter.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\OpCodeUtil.cs">
+      <Link>Castle\Generators\Emitters\OpCodeUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\PropertiesCollection.cs">
+      <Link>Castle\Generators\Emitters\PropertiesCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\PropertyEmitter.cs">
+      <Link>Castle\Generators\Emitters\PropertyEmitter.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\AddressOfReferenceExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\AddressOfReferenceExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\ArgumentReference.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\ArgumentReference.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\AssignArgumentStatement.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\AssignArgumentStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\AssignArrayStatement.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\AssignArrayStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\AssignStatement.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\AssignStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\AsTypeReference.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\AsTypeReference.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\BindDelegateExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\BindDelegateExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\ByRefReference.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\ByRefReference.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\ConstReference.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\ConstReference.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\ConstructorInvocationStatement.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\ConstructorInvocationStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\ConvertExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\ConvertExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\DefaultValueExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\DefaultValueExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\EndExceptionBlockStatement.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\EndExceptionBlockStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\ExplicitConvertExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\ExplicitConvertExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\Expression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\Expression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\ExpressionStatement.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\ExpressionStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\FieldReference.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\FieldReference.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\FinallyStatement.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\FinallyStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\IfNullExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\IfNullExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\IILEmitter.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\IILEmitter.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\IndirectReference.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\IndirectReference.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\LiteralIntExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\LiteralIntExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\LoadArrayElementExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\LoadArrayElementExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\LoadRefArrayElementExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\LoadRefArrayElementExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\LocalReference.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\LocalReference.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\MethodInvocationExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\MethodInvocationExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\MethodTokenExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\MethodTokenExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\MultiStatementExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\MultiStatementExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\NewArrayExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\NewArrayExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\NewInstanceExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\NewInstanceExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\NopStatement.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\NopStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\NullCoalescingOperatorExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\NullCoalescingOperatorExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\NullExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\NullExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\Reference.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\Reference.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\ReferenceExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\ReferenceExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\ReferencesToObjectArrayExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\ReferencesToObjectArrayExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\ReturnReferenceExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\ReturnReferenceExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\ReturnStatement.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\ReturnStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\SelfReference.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\SelfReference.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\Statement.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\Statement.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\ThrowStatement.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\ThrowStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\TryStatement.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\TryStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\TypeReference.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\TypeReference.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\SimpleAST\TypeTokenExpression.cs">
+      <Link>Castle\Generators\Emitters\SimpleAST\TypeTokenExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\StindOpCodesDictionary.cs">
+      <Link>Castle\Generators\Emitters\StindOpCodesDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\StrongNameUtil.cs">
+      <Link>Castle\Generators\Emitters\StrongNameUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\TypeConstructorEmitter.cs">
+      <Link>Castle\Generators\Emitters\TypeConstructorEmitter.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\Emitters\TypeUtil.cs">
+      <Link>Castle\Generators\Emitters\TypeUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\GeneratorException.cs">
+      <Link>Castle\Generators\GeneratorException.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\GeneratorUtil.cs">
+      <Link>Castle\Generators\GeneratorUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\IGenerator.cs">
+      <Link>Castle\Generators\IGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\IInvocationCreationContributor.cs">
+      <Link>Castle\Generators\IInvocationCreationContributor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\INamingScope.cs">
+      <Link>Castle\Generators\INamingScope.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\InheritanceInvocationTypeGenerator.cs">
+      <Link>Castle\Generators\InheritanceInvocationTypeGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\InterfaceProxyWithoutTargetGenerator.cs">
+      <Link>Castle\Generators\InterfaceProxyWithoutTargetGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\InterfaceProxyWithTargetGenerator.cs">
+      <Link>Castle\Generators\InterfaceProxyWithTargetGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\InterfaceProxyWithTargetInterfaceGenerator.cs">
+      <Link>Castle\Generators\InterfaceProxyWithTargetInterfaceGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\InvocationTypeGenerator.cs">
+      <Link>Castle\Generators\InvocationTypeGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\MetaEvent.cs">
+      <Link>Castle\Generators\MetaEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\MetaMethod.cs">
+      <Link>Castle\Generators\MetaMethod.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\MetaProperty.cs">
+      <Link>Castle\Generators\MetaProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\MetaType.cs">
+      <Link>Castle\Generators\MetaType.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\MetaTypeElement.cs">
+      <Link>Castle\Generators\MetaTypeElement.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\MethodFinder.cs">
+      <Link>Castle\Generators\MethodFinder.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\MethodGenerator.cs">
+      <Link>Castle\Generators\MethodGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\MethodSignatureComparer.cs">
+      <Link>Castle\Generators\MethodSignatureComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\MethodWithInvocationGenerator.cs">
+      <Link>Castle\Generators\MethodWithInvocationGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\NamingScope.cs">
+      <Link>Castle\Generators\NamingScope.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Generators\TypeElementCollection.cs">
+      <Link>Castle\Generators\TypeElementCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\IAttributeDisassembler.cs">
+      <Link>Castle\IAttributeDisassembler.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\IChangeProxyTarget.cs">
+      <Link>Castle\IChangeProxyTarget.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\IInterceptor.cs">
+      <Link>Castle\IInterceptor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\IInterceptorSelector.cs">
+      <Link>Castle\IInterceptorSelector.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\IInvocation.cs">
+      <Link>Castle\IInvocation.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Internal\AttributeUtil.cs">
+      <Link>Castle\Internal\AttributeUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Internal\CompositionInvocation.cs">
+      <Link>Castle\Internal\CompositionInvocation.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Internal\InheritanceInvocation.cs">
+      <Link>Castle\Internal\InheritanceInvocation.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Internal\InternalsUtil.cs">
+      <Link>Castle\Internal\InternalsUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Internal\InvocationHelper.cs">
+      <Link>Castle\Internal\InvocationHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\InvalidMixinConfigurationException.cs">
+      <Link>Castle\InvalidMixinConfigurationException.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\InvalidProxyConstructorArgumentsException.cs">
+      <Link>Castle\InvalidProxyConstructorArgumentsException.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\IProxyBuilder.cs">
+      <Link>Castle\IProxyBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\IProxyGenerationHook.cs">
+      <Link>Castle\IProxyGenerationHook.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\IProxyTargetAccessor.cs">
+      <Link>Castle\IProxyTargetAccessor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\MixinData.cs">
+      <Link>Castle\MixinData.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\ModuleScope.cs">
+      <Link>Castle\ModuleScope.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\PersistentProxyBuilder.cs">
+      <Link>Castle\PersistentProxyBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\ProxyGenerationException.cs">
+      <Link>Castle\ProxyGenerationException.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\ProxyGenerationOptions.cs">
+      <Link>Castle\ProxyGenerationOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\ProxyGenerator.cs">
+      <Link>Castle\ProxyGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\ProxyUtil.cs">
+      <Link>Castle\ProxyUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Serialization\CacheMappingsAttribute.cs">
+      <Link>Castle\Serialization\CacheMappingsAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Serialization\ProxyObjectReference.cs">
+      <Link>Castle\Serialization\ProxyObjectReference.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Serialization\ProxyTypeConstants.cs">
+      <Link>Castle\Serialization\ProxyTypeConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Serialization\RemotableInvocation.cs">
+      <Link>Castle\Serialization\RemotableInvocation.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\StandardInterceptor.cs">
+      <Link>Castle\StandardInterceptor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Tokens\DelegateMethods.cs">
+      <Link>Castle\Tokens\DelegateMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Tokens\FormatterServicesMethods.cs">
+      <Link>Castle\Tokens\FormatterServicesMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Tokens\InvocationMethods.cs">
+      <Link>Castle\Tokens\InvocationMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Tokens\MethodBaseMethods.cs">
+      <Link>Castle\Tokens\MethodBaseMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Tokens\SerializationInfoMethods.cs">
+      <Link>Castle\Tokens\SerializationInfoMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Tokens\TypeBuilderMethods.cs">
+      <Link>Castle\Tokens\TypeBuilderMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Tokens\TypeMethods.cs">
+      <Link>Castle\Tokens\TypeMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Tokens\TypeUtilMethods.cs">
+      <Link>Castle\Tokens\TypeUtilMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Util\AttributeUtil.cs">
+      <Link>Castle\Util\AttributeUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Util\DebugExtender.cs">
+      <Link>Castle\Util\DebugExtender.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Util\ILockHolder.cs">
+      <Link>Castle\Util\ILockHolder.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Util\ILogger.cs">
+      <Link>Castle\Util\ILogger.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Util\InterfaceMapping.cs">
+      <Link>Castle\Util\InterfaceMapping.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Util\IUpgradeableLockHolder.cs">
+      <Link>Castle\Util\IUpgradeableLockHolder.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Util\Lock.cs">
+      <Link>Castle\Util\Lock.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Util\MonitorLock.cs">
+      <Link>Castle\Util\MonitorLock.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Util\MonitorLockHolder.cs">
+      <Link>Castle\Util\MonitorLockHolder.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Util\MonitorUpgradeableLockHolder.cs">
+      <Link>Castle\Util\MonitorUpgradeableLockHolder.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Util\NoOpLock.cs">
+      <Link>Castle\Util\NoOpLock.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Util\NullLogger.cs">
+      <Link>Castle\Util\NullLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Castle\Util\SerializableAttribute.cs">
+      <Link>Castle\Util\SerializableAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\!Special\ResourceManager.cs">
+      <Link>Original\!Special\ResourceManager.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\!Special\Resources.cs">
+      <Link>Original\!Special\Resources.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\AdvancedMatcherAttribute.cs">
+      <Link>Original\AdvancedMatcherAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\AsInterface.cs">
+      <Link>Original\AsInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\ConditionalContext.cs">
+      <Link>Original\ConditionalContext.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\DefaultValue.cs">
+      <Link>Original\DefaultValue.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\EmptyDefaultValueProvider.cs">
+      <Link>Original\EmptyDefaultValueProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Evaluator.cs">
+      <Link>Original\Evaluator.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\ExpressionExtensions.cs">
+      <Link>Original\ExpressionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\ExpressionStringBuilder.cs">
+      <Link>Original\ExpressionStringBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Extensions.cs">
+      <Link>Original\Extensions.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\FluentMockContext.cs">
+      <Link>Original\FluentMockContext.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\GlobalSuppressions.cs">
+      <Link>Original\GlobalSuppressions.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Guard.cs">
+      <Link>Original\Guard.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\IDefaultValueProvider.cs">
+      <Link>Original\IDefaultValueProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\IHideObjectMembers.cs">
+      <Link>Original\IHideObjectMembers.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\IMatcher.cs">
+      <Link>Original\IMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\IMocked.cs">
+      <Link>Original\IMocked.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Includes\GenericTypeParameters.cs">
+      <Link>Original\Includes\GenericTypeParameters.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GenericTypeParameters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Interceptor.cs">
+      <Link>Original\Interceptor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\IProxyCall.cs">
+      <Link>Original\IProxyCall.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\It.cs">
+      <Link>Original\It.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\Flow\ICallbackResult.cs">
+      <Link>Original\Language\Flow\ICallbackResult.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\Flow\IReturnsResult.cs">
+      <Link>Original\Language\Flow\IReturnsResult.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\Flow\IReturnsThrows.cs">
+      <Link>Original\Language\Flow\IReturnsThrows.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\Flow\ISetup.cs">
+      <Link>Original\Language\Flow\ISetup.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\Flow\IThrowsResult.cs">
+      <Link>Original\Language\Flow\IThrowsResult.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\ICallback.cs">
+      <Link>Original\Language\ICallback.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\ICallback1.Generated.cs">
+      <Link>Original\Language\ICallback1.Generated.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ICallback.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\ICallbackGetter.cs">
+      <Link>Original\Language\ICallbackGetter.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\ICallbackSetter.cs">
+      <Link>Original\Language\ICallbackSetter.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\IRaise.cs">
+      <Link>Original\Language\IRaise.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\IRaise1.Generated.cs">
+      <Link>Original\Language\IRaise1.Generated.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IRaise.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\IReturns.cs">
+      <Link>Original\Language\IReturns.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\IReturns1.Generated.cs">
+      <Link>Original\Language\IReturns1.Generated.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IReturns.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\IReturnsGetter.cs">
+      <Link>Original\Language\IReturnsGetter.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\ISetupConditionResult.cs">
+      <Link>Original\Language\ISetupConditionResult.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\ISetupSequentialResult.cs">
+      <Link>Original\Language\ISetupSequentialResult.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\IThrows.cs">
+      <Link>Original\Language\IThrows.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Language\IVerifies.cs">
+      <Link>Original\Language\IVerifies.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Linq\FluentMockVisitor.cs">
+      <Link>Original\Linq\FluentMockVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Linq\Mock.cs">
+      <Link>Original\Linq\Mock.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Linq\MockQuery.cs">
+      <Link>Original\Linq\MockQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Linq\MockRepository.cs">
+      <Link>Original\Linq\MockRepository.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Linq\Mocks.cs">
+      <Link>Original\Linq\Mocks.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Linq\MockSetupsBuilder.cs">
+      <Link>Original\Linq\MockSetupsBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Match.cs">
+      <Link>Original\Match.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\MatcherAttribute.cs">
+      <Link>Original\MatcherAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\MatcherFactory.cs">
+      <Link>Original\MatcherFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Matchers\ConstantMatcher.cs">
+      <Link>Original\Matchers\ConstantMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Matchers\ExpressionComparer.cs">
+      <Link>Original\Matchers\ExpressionComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Matchers\ExpressionMatcher.cs">
+      <Link>Original\Matchers\ExpressionMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Matchers\LazyEvalMatcher.cs">
+      <Link>Original\Matchers\LazyEvalMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Matchers\Matcher.cs">
+      <Link>Original\Matchers\Matcher.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Matchers\MatcherAttributeMatcher.cs">
+      <Link>Original\Matchers\MatcherAttributeMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Matchers\ParamArrayMatcher.cs">
+      <Link>Original\Matchers\ParamArrayMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Matchers\PredicateMatcher.cs">
+      <Link>Original\Matchers\PredicateMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Matchers\RefMatcher.cs">
+      <Link>Original\Matchers\RefMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\MatchExpression.cs">
+      <Link>Original\MatchExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\MemberInfoExtensions.cs">
+      <Link>Original\MemberInfoExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\MethodCall.cs">
+      <Link>Original\MethodCall.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\MethodCall1.Generated.cs">
+      <Link>Original\MethodCall1.Generated.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MethodCall.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\MethodCallReturn.cs">
+      <Link>Original\MethodCallReturn.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\MethodCallReturn1.Generated.cs">
+      <Link>Original\MethodCallReturn1.Generated.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MethodCallReturn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Microsoft\Delegates.cs">
+      <Link>Original\Microsoft\Delegates.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Microsoft\Delegates1.cs">
+      <Link>Original\Microsoft\Delegates1.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Delegates.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Microsoft\ExpressionVisitor.cs">
+      <Link>Original\Microsoft\ExpressionVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Mock.cs">
+      <Link>Original\Mock.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Mock.Generic.cs">
+      <Link>Original\Mock.Generic.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\MockBehavior.cs">
+      <Link>Original\MockBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\MockDefaultValueProvider.cs">
+      <Link>Original\MockDefaultValueProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\MockException.cs">
+      <Link>Original\MockException.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\MockRepository.cs">
+      <Link>Original\MockRepository.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\MockSequence.cs">
+      <Link>Original\MockSequence.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Obsolete\IOccurrence.cs">
+      <Link>Original\Obsolete\IOccurrence.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Obsolete\Mock.Generic.Legacy.cs">
+      <Link>Original\Obsolete\Mock.Generic.Legacy.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Obsolete\Mock.Legacy.cs">
+      <Link>Original\Obsolete\Mock.Legacy.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Obsolete\MockExtensions.cs">
+      <Link>Original\Obsolete\MockExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Obsolete\MockFactory.cs">
+      <Link>Original\Obsolete\MockFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\PexProtector.cs">
+      <Link>Original\PexProtector.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Protected\IProtectedMock.cs">
+      <Link>Original\Protected\IProtectedMock.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Protected\ItExpr.cs">
+      <Link>Original\Protected\ItExpr.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Protected\ProtectedExtension.cs">
+      <Link>Original\Protected\ProtectedExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Protected\ProtectedMock.cs">
+      <Link>Original\Protected\ProtectedMock.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Proxy\CastleProxyFactory.cs">
+      <Link>Original\Proxy\CastleProxyFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Proxy\ICallContext.cs">
+      <Link>Original\Proxy\ICallContext.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Proxy\ICallInterceptor.cs">
+      <Link>Original\Proxy\ICallInterceptor.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Proxy\IProxyFactory.cs">
+      <Link>Original\Proxy\IProxyFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Range.cs">
+      <Link>Original\Range.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\SequenceExtensions.cs">
+      <Link>Original\SequenceExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\SetterMethodCall.cs">
+      <Link>Original\SetterMethodCall.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\SetupKind.cs">
+      <Link>Original\SetupKind.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\SetupSequentialContext.cs">
+      <Link>Original\SetupSequentialContext.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Original\Times.cs">
+      <Link>Original\Times.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Interfaces\IConstructorBuilder.cs">
+      <Link>Sre\Interfaces\IConstructorBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Interfaces\IEventInfo.cs">
+      <Link>Sre\Interfaces\IEventInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Interfaces\IFieldInfo.cs">
+      <Link>Sre\Interfaces\IFieldInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Interfaces\IMemberInfo.cs">
+      <Link>Sre\Interfaces\IMemberInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Interfaces\IMethodBase.cs">
+      <Link>Sre\Interfaces\IMethodBase.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Interfaces\IMethodInfo.cs">
+      <Link>Sre\Interfaces\IMethodInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Interfaces\IParameterInfo.cs">
+      <Link>Sre\Interfaces\IParameterInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Interfaces\IPropertyInfo.cs">
+      <Link>Sre\Interfaces\IPropertyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Interfaces\IReflectableBase.cs">
+      <Link>Sre\Interfaces\IReflectableBase.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Wrappers\ConstructorFactory.cs">
+      <Link>Sre\Wrappers\ConstructorFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Wrappers\ConstructorInfoWrapper.cs">
+      <Link>Sre\Wrappers\ConstructorInfoWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Wrappers\FieldInfoWrapper.cs">
+      <Link>Sre\Wrappers\FieldInfoWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Wrappers\MemberInfoReflectionWrapper.cs">
+      <Link>Sre\Wrappers\MemberInfoReflectionWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Wrappers\MethodBaseReflectionWrapper.cs">
+      <Link>Sre\Wrappers\MethodBaseReflectionWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Wrappers\MethodInfoWrapper.cs">
+      <Link>Sre\Wrappers\MethodInfoWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Wrappers\ParameterInfoWrapper.cs">
+      <Link>Sre\Wrappers\ParameterInfoWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Wrappers\PropertyInfoWrapper.cs">
+      <Link>Sre\Wrappers\PropertyInfoWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Wrappers\ReflectionWrapper.cs">
+      <Link>Sre\Wrappers\ReflectionWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Wrappers\ReflectionWrapperFactory.cs">
+      <Link>Sre\Wrappers\ReflectionWrapperFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Wrappers\ReflectionWrapperShim.cs">
+      <Link>Sre\Wrappers\ReflectionWrapperShim.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runtime\DotNetFixup.cs" />
+    <Compile Include="Runtime\ReverseTypeExtender.cs" />
+    <Compile Include="Runtime\TypeExtender.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\MoqRT.MetroStyle\Original\ilmerge.exclude">
+      <Link>Original\ilmerge.exclude</Link>
+    </None>
+    <None Include="..\MoqRT.MetroStyle\Original\Includes\GenericTypeParameters.tt">
+      <Link>Original\Includes\GenericTypeParameters.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GenericTypeParameters.cs</LastGenOutput>
+    </None>
+    <None Include="..\MoqRT.MetroStyle\Original\Language\ICallback.tt">
+      <Link>Original\Language\ICallback.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ICallback1.Generated.cs</LastGenOutput>
+    </None>
+    <None Include="..\MoqRT.MetroStyle\Original\Language\IRaise.tt">
+      <Link>Original\Language\IRaise.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IRaise1.Generated.cs</LastGenOutput>
+    </None>
+    <None Include="..\MoqRT.MetroStyle\Original\Language\IReturns.tt">
+      <Link>Original\Language\IReturns.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IReturns1.Generated.cs</LastGenOutput>
+    </None>
+    <None Include="..\MoqRT.MetroStyle\Original\MethodCall.tt">
+      <Link>Original\MethodCall.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MethodCall1.Generated.cs</LastGenOutput>
+    </None>
+    <None Include="..\MoqRT.MetroStyle\Original\MethodCallReturn.tt">
+      <Link>Original\MethodCallReturn.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MethodCallReturn1.Generated.cs</LastGenOutput>
+    </None>
+    <None Include="..\MoqRT.MetroStyle\Original\Microsoft\Delegates.tt">
+      <Link>Original\Microsoft\Delegates.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Delegates1.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
