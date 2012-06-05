@@ -52,9 +52,9 @@ namespace MoqRT
             }
         }
 
-        public static void InitializeBaking(string testAssembly, string appxPath)
+        public static void InitializeBaking(string testAssembly, string appxPath, string bakingPath)
         {
-            Baker = new BakingController(testAssembly, appxPath);
+            Baker = new BakingController(testAssembly, appxPath, bakingPath);
         }
 
         public static string FinishBaking()
@@ -102,7 +102,7 @@ namespace MoqRT
                 {
                     var name = new AssemblyName()
                     {
-                        Name = Path.GetFileName(ModuleScope.DEFAULT_FILE_NAME)
+                        Name = Path.GetFileNameWithoutExtension(ModuleScope.DEFAULT_FILE_NAME)
                     };
                     _bakedAssembly = Assembly.Load(name);
                 }

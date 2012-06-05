@@ -13,14 +13,14 @@ namespace MoqRT.Baking
     internal class BakingRunner
     {
         private BakingController Owner { get; set; }
-        private Queue<BakingSettings> WorkItems { get; set; }
+        private Queue<WorkItem> WorkItems { get; set; }
         private Thread Thread { get; set; }
         private AutoResetEvent Waiter { get; set; }
 
         internal BakingRunner(BakingController owner)
         {
             this.Owner = owner;
-            this.WorkItems = new Queue<BakingSettings>();
+            this.WorkItems = new Queue<WorkItem>();
 
             this.Waiter = new AutoResetEvent(false);
             this.Thread = new Thread(ThreadEntryPoint);
@@ -34,27 +34,38 @@ namespace MoqRT.Baking
             {
                 try
                 {
+                    List<WorkItem> requeue = new List<WorkItem>();
                     while (this.WorkItems.Count > 0)
                     {
                         // run...
                         var item = this.WorkItems.Dequeue();
 
-                        // create...
-                        AppDomain domain = AppDomain.CreateDomain(item.AssemblyFilename);
-                        var type = typeof(BakingPoke);
-                        IBakingPoke poke = (IBakingPoke)domain.CreateInstanceAndUnwrap(type.Assembly.GetName().ToString(), type.FullName);
-                        try
+                        // ok...
+                        if (item.OkToRun)
                         {
-                            poke.Bake(this.Owner, item);
+                            // create...
+                            AppDomain domain = AppDomain.CreateDomain(item.Settings.AssemblyFilename);
+                            var type = typeof(BakingPoke);
+                            IBakingPoke poke = (IBakingPoke)domain.CreateInstanceAndUnwrap(type.Assembly.GetName().ToString(), type.FullName);
+                            try
+                            {
+                                poke.Bake(this.Owner, item.Settings);
+                            }
+                            finally
+                            {
+                                AppDomain.Unload(domain);
+                            }
                         }
-                        finally
-                        {
-                            AppDomain.Unload(domain);
-                        }
+                        else
+                            requeue.Add(item);
                     }
 
+                    // walk...
+                    foreach (var item in requeue)
+                        this.WorkItems.Enqueue(item);
+
                     // wait...
-                    this.Waiter.WaitOne(TimeSpan.FromSeconds(5));
+                    this.Waiter.WaitOne(1000);
                     this.Waiter.Reset();
                 }
                 catch (ThreadAbortException)
@@ -75,8 +86,23 @@ namespace MoqRT.Baking
 
         internal void Enqueue(BakingSettings settings)
         {
-            this.WorkItems.Enqueue(settings.Clone());
-            this.Waiter.Set();
+            this.Enqueue(settings, DateTime.MinValue);
+        }
+
+        internal void Enqueue(BakingSettings settings, DateTime dt)
+        {
+            var existing = this.WorkItems.Where(v => v.Settings.AssemblyPath == settings.AssemblyPath && 
+                v.AtOrAfter != DateTime.MinValue).FirstOrDefault();
+            if (existing != null)
+            {
+                existing.AtOrAfter = dt;
+                return;
+            }
+            else
+            {
+                this.WorkItems.Enqueue(new WorkItem(settings.Clone(), dt));
+                this.Waiter.Set();
+            }
         }
     }
 }

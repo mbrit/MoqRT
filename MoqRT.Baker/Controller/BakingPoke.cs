@@ -38,7 +38,7 @@ namespace MoqRT.Baking
                     // run...
                     owner.Log("Initializing...");
                     var initializeMethod = rt.GetMethod("InitializeBaking", BindingFlags.Static | BindingFlags.Public);
-                    initializeMethod.Invoke(null, new object[] { settings.AssemblyPath, settings.AppxPath });
+                    initializeMethod.Invoke(null, new object[] { settings.AssemblyPath, settings.AppxPath, settings.BakingPath });
 
                     //// more...
                     //var setRunningMethodMethod = bakerType.GetMethod("SetRunningMethod", BindingFlags.Instance | BindingFlags.Public);
@@ -113,8 +113,22 @@ namespace MoqRT.Baking
                     owner.Log("Finishing up...");
                     var finishMethod = rt.GetMethod("FinishBaking", BindingFlags.Static | BindingFlags.Public);
                     string bakedPath = (string)finishMethod.Invoke(null, null);
-
                     owner.Log("Baking process complete. Baked assembly at: " + bakedPath);
+
+                    // copy...
+                    var finalPath = Path.Combine(settings.AppxPath, settings.AssemblyFilename);
+                    if (File.Exists(finalPath))
+                        File.Delete(finalPath);
+                    File.Copy(bakedPath, finalPath);
+                    owner.Log("Assembly placed in deployment folder at: " + finalPath);
+
+                    const string databaseName = "MoqRT.Baked.dll.db";
+                    var dbPath = Path.Combine(settings.BakingPath, databaseName);
+                    var finalDbPath = Path.Combine(settings.AppxPath, databaseName);
+                    if (File.Exists(finalDbPath))
+                        File.Delete(finalDbPath);
+                    File.Copy(dbPath, finalDbPath);
+                    owner.Log("Tracking database placed in deployment folder at: " + finalDbPath);
                 }
             }
             finally

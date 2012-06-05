@@ -18,13 +18,13 @@ namespace MoqRT.Baking
         internal string AppxPath { get; set; }
         private string DatabasePath { get; set; }
 
-        internal const string DatabaseName = "MoqRTBaking.db";
+        internal const string DatabaseName = "MoqRT.Baked.dll.db";
 
-        internal BakingController(string testAssembly, string appxPath)
+        internal BakingController(string testAssembly, string appxPath, string bakingPath)
         {
             this.TestAssemblyPath = testAssembly;
-            this.AppxPath = appxPath;
-            this.DatabasePath = Path.Combine(appxPath, DatabaseName);
+            this.AppxPath = bakingPath;
+            this.DatabasePath = Path.Combine(bakingPath, DatabaseName);
 
             // setup...
             using (var conn = GetDatabase())

@@ -35,6 +35,25 @@ namespace Moq.Tests
 			mock.VerifyAll();
 		}
 
+        [TestMethod]
+        public void FillingRemovesInventoryIfInStock2()
+        {
+            //setup - data
+            var order = new Order(TALISKER, 50);
+            var mock = Mock.Create<IWarehouse2>();
+
+            //setup - expectations
+            mock.Setup(x => x.HasInventory(TALISKER, 50)).Returns(true);
+
+            //exercise
+            order.Fill(mock.Object);
+
+            //verify state
+            Assert.IsTrue(order.IsFilled);
+            //verify interaction
+            mock.VerifyAll();
+        }
+
 		public void FillingDoesNotRemoveIfNotEnoughInStock()
 		{
 			//setup - data
@@ -100,6 +119,12 @@ namespace Moq.Tests
 			void Remove(string productName, int quantity);
 		}
 
+        public interface IWarehouse2
+        {
+            bool HasInventory(string productName, int quantity);
+            void Remove(string productName, int quantity);
+        }
+
 		public class Order
 		{
 			public string ProductName { get; private set; }
@@ -120,6 +145,15 @@ namespace Moq.Tests
 					IsFilled = true;
 				}
 			}
+
+            public void Fill(IWarehouse2 warehouse)
+            {
+                if (warehouse.HasInventory(ProductName, Quantity))
+                {
+                    warehouse.Remove(ProductName, Quantity);
+                    IsFilled = true;
+                }
+            }
 
 		}
 

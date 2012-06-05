@@ -144,9 +144,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CastleDynProxy2, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\MoqRT.MetroStyle.Runner\bin\Debug\CastleDynProxy2.dll</HintPath>
+    <Reference Include="MoqRT.Baked">
+      <HintPath>bin\Baking\MoqRT.Baked.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">

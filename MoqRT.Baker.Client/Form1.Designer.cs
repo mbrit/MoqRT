@@ -42,6 +42,9 @@
             this.textLog = new System.Windows.Forms.RichTextBox();
             this.timerLog = new System.Windows.Forms.Timer(this.components);
             this.buttonRefresh = new System.Windows.Forms.Button();
+            this.buttonBrowseBaking = new System.Windows.Forms.Button();
+            this.textBakingFolder = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -50,6 +53,9 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.buttonBrowseBaking);
+            this.groupBox1.Controls.Add(this.textBakingFolder);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.buttonRefresh);
             this.groupBox1.Controls.Add(this.buttonStop);
             this.groupBox1.Controls.Add(this.buttonRun);
@@ -61,14 +67,14 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(582, 112);
+            this.groupBox1.Size = new System.Drawing.Size(582, 136);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(167, 72);
+            this.buttonStop.Location = new System.Drawing.Point(167, 98);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStop.TabIndex = 7;
@@ -77,7 +83,7 @@
             // 
             // buttonRun
             // 
-            this.buttonRun.Location = new System.Drawing.Point(86, 72);
+            this.buttonRun.Location = new System.Drawing.Point(86, 98);
             this.buttonRun.Name = "buttonRun";
             this.buttonRun.Size = new System.Drawing.Size(75, 23);
             this.buttonRun.TabIndex = 6;
@@ -148,9 +154,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.textLog);
-            this.groupBox2.Location = new System.Drawing.Point(12, 130);
+            this.groupBox2.Location = new System.Drawing.Point(12, 154);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(582, 285);
+            this.groupBox2.Size = new System.Drawing.Size(582, 261);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Output";
@@ -163,7 +169,7 @@
             this.textLog.Location = new System.Drawing.Point(0, 19);
             this.textLog.Name = "textLog";
             this.textLog.ReadOnly = true;
-            this.textLog.Size = new System.Drawing.Size(570, 260);
+            this.textLog.Size = new System.Drawing.Size(570, 236);
             this.textLog.TabIndex = 0;
             this.textLog.Text = "";
             // 
@@ -174,13 +180,41 @@
             // 
             // buttonRefresh
             // 
-            this.buttonRefresh.Location = new System.Drawing.Point(248, 72);
+            this.buttonRefresh.Location = new System.Drawing.Point(248, 98);
             this.buttonRefresh.Name = "buttonRefresh";
             this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
             this.buttonRefresh.TabIndex = 8;
             this.buttonRefresh.Text = "&Refresh";
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
+            // buttonBrowseBaking
+            // 
+            this.buttonBrowseBaking.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonBrowseBaking.Location = new System.Drawing.Point(501, 65);
+            this.buttonBrowseBaking.Name = "buttonBrowseBaking";
+            this.buttonBrowseBaking.Size = new System.Drawing.Size(75, 23);
+            this.buttonBrowseBaking.TabIndex = 11;
+            this.buttonBrowseBaking.Text = "Br&owse >>";
+            this.buttonBrowseBaking.UseVisualStyleBackColor = true;
+            // 
+            // textBakingFolder
+            // 
+            this.textBakingFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBakingFolder.Location = new System.Drawing.Point(86, 65);
+            this.textBakingFolder.Name = "textBakingFolder";
+            this.textBakingFolder.Size = new System.Drawing.Size(409, 20);
+            this.textBakingFolder.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 67);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(69, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Ba&king folder";
             // 
             // Form1
             // 
@@ -216,6 +250,9 @@
         private System.Windows.Forms.RichTextBox textLog;
         private System.Windows.Forms.Timer timerLog;
         private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.Button buttonBrowseBaking;
+        private System.Windows.Forms.TextBox textBakingFolder;
+        private System.Windows.Forms.Label label3;
     }
 }
 

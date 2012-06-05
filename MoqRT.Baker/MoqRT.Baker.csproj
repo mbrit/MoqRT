@@ -45,6 +45,7 @@
     <Compile Include="Controller\BakingSettings.cs" />
     <Compile Include="Controller\IBakingPoke.cs" />
     <Compile Include="Controller\LogEventArgs.cs" />
+    <Compile Include="Controller\WorkItem.cs" />
     <Compile Include="Data\SQLiteHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
