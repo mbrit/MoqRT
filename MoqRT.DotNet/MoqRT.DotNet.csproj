@@ -934,6 +934,7 @@
       <Link>Sre\Wrappers\ReflectionWrapperShim.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runtime\BakingController.cs" />
     <Compile Include="Runtime\DotNetFixup.cs" />
     <Compile Include="Runtime\MoqRTRuntime.cs" />
     <Compile Include="Runtime\ReverseTypeExtender.cs" />

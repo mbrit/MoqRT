@@ -7,6 +7,7 @@ using System.Diagnostics;
 #else
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using System.Diagnostics;
+using System.Reflection;
 #endif
 
 namespace Moq.Tests

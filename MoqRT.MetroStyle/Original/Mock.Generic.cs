@@ -46,6 +46,7 @@ using Moq.Language.Flow;
 using Moq.Proxy;
 using Moq.Language;
 using Moq.Properties;
+using System.Text;
 
 namespace Moq
 {
@@ -401,5 +402,22 @@ namespace Moq
 		//    // TODO: doesn't work as expected but ONLY with interfaces :S
 		//    throw new NotImplementedException();
 		//}
+
+        internal override string ProxyKey
+        {
+            get
+            {
+                StringBuilder builder = new StringBuilder();
+                var args = this.GetType().GenericTypeArguments;
+                builder.Append("Mock<T>");
+                foreach (var arg in args)
+                {
+                    builder.Append("|");
+                    builder.Append(arg.FullName);
+                }
+
+                return builder.ToString();
+            }
+        }
     }
 }

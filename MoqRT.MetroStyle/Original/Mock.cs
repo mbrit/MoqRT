@@ -158,10 +158,24 @@ namespace Moq
 
 		private object GetObject()
 		{
-			var value = this.OnGetObject();
-			this.isInitialized = true;
-			return value;
+            if (MoqRTRuntime.UsingBakedProxies)
+                return GetBakedProxy();
+
+            var value = this.OnGetObject();
+            this.isInitialized = true;
+
+            // are we baking?
+            if(MoqRTRuntime.IsBaking)
+                MoqRTRuntime.Baker.ProxyCreated(this, value);
+
+            return value;
 		}
+
+        private object GetBakedProxy()
+        {
+            string key = this.ProxyKey;
+            return MoqRTRuntime.GetBakedProxy(key, new ProxyInterceptor(this.Interceptor), new object[] {});
+        }
 
 		internal virtual Interceptor Interceptor { get; set; }
 

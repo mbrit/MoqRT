@@ -50,13 +50,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\sqlite3.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\MoqRT.DotNet\MoqRT.DotNet.csproj">
       <Project>{2e4df86d-ba27-4c09-a10d-3af5f18c2d88}</Project>
       <Name>MoqRT.DotNet</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -83,13 +83,13 @@ namespace Moq.Proxy
 
 			if (mockType.IsInterface())
 			{
-				return (T)generator.CreateInterfaceProxyWithoutTarget(mockType, interfaces, new Interceptor(interceptor));
+				return (T)generator.CreateInterfaceProxyWithoutTarget(mockType, interfaces, new ProxyInterceptor(interceptor));
 			}
 
 			try
 			{
                 return (T)generator.CreateClassProxy(mockType, interfaces, new ProxyGenerationOptions(), arguments, 
-                    new Interceptor(interceptor));
+                    new ProxyInterceptor(interceptor));
             }
 			catch (TypeLoadException e)
 			{
@@ -116,60 +116,62 @@ namespace Moq.Proxy
             return new ProxyGenerator(builder);
         }
 
-        private class Interceptor : IInterceptor
-		{
-			private ICallInterceptor interceptor;
-
-			internal Interceptor(ICallInterceptor interceptor)
-			{
-				this.interceptor = interceptor;
-			}
-
-			public void Intercept(IInvocation invocation)
-			{
-				this.interceptor.Intercept(new CallContext(invocation));
-			}
-		}
-
-		private class CallContext : ICallContext
-		{
-			private IInvocation invocation;
-
-			internal CallContext(IInvocation invocation)
-			{
-				this.invocation = invocation;
-			}
-
-			public object[] Arguments
-			{
-				get { return this.invocation.Arguments; }
-			}
-
-			public MethodInfo Method
-			{
-                get { return this.invocation.Method; }
-			}
-
-			public object ReturnValue
-			{
-				get { return this.invocation.ReturnValue; }
-				set { this.invocation.ReturnValue = value; }
-			}
-
-			public void InvokeBase()
-			{
-				this.invocation.Proceed();
-			}
-
-			public void SetArgumentValue(int index, object value)
-			{
-				this.invocation.SetArgumentValue(index, value);
-			}
-		}
-
+#if NETFX_CORE
         internal static PersistentProxyBuilder GetPersistentBuilder()
         {
             return (PersistentProxyBuilder)generator.ProxyBuilder;
         }
+#endif
 	}
+
+    internal class ProxyInterceptor : IInterceptor
+    {
+        private ICallInterceptor interceptor;
+
+        internal ProxyInterceptor(ICallInterceptor interceptor)
+        {
+            this.interceptor = interceptor;
+        }
+
+        public void Intercept(IInvocation invocation)
+        {
+            this.interceptor.Intercept(new CallContext(invocation));
+        }
+    }
+
+    internal class CallContext : ICallContext
+    {
+        private IInvocation invocation;
+
+        internal CallContext(IInvocation invocation)
+        {
+            this.invocation = invocation;
+        }
+
+        public object[] Arguments
+        {
+            get { return this.invocation.Arguments; }
+        }
+
+        public MethodInfo Method
+        {
+            get { return this.invocation.Method; }
+        }
+
+        public object ReturnValue
+        {
+            get { return this.invocation.ReturnValue; }
+            set { this.invocation.ReturnValue = value; }
+        }
+
+        public void InvokeBase()
+        {
+            this.invocation.Proceed();
+        }
+
+        public void SetArgumentValue(int index, object value)
+        {
+            this.invocation.SetArgumentValue(index, value);
+        }
+    }
 }

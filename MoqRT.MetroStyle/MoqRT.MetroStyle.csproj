@@ -610,6 +610,8 @@
     <Compile Include="Castle\Util\SerializableAttribute.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Database\GeneratedType.cs" />
+    <Compile Include="Database\SQLite.cs" />
     <Compile Include="Driver\RealISetupWrapper.cs" />
     <Compile Include="Driver\RealMockFactory.cs" />
     <Compile Include="Driver\RealMockWrapper.cs" />

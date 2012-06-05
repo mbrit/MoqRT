@@ -43,7 +43,10 @@ namespace MoqRTPoc.Baker
 
                 // run...
                 var initializeMethod = rt.GetMethod("InitializeBaking", BindingFlags.Static | BindingFlags.Public);
-                initializeMethod.Invoke(null, null);
+
+                // THIS NEEDS CHANGING - the path needs to be where it's COMPILED TO, not where
+                // it's DEPLOYED TO...
+                initializeMethod.Invoke(null, new object[] { path, RootFolder });
 
                 //// more...
                 //var setRunningMethodMethod = bakerType.GetMethod("SetRunningMethod", BindingFlags.Instance | BindingFlags.Public);

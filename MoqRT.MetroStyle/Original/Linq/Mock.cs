@@ -71,5 +71,13 @@ namespace Moq
 		{
 			return Mocks.CreateMockQuery<T>().First<T>(predicate);
 		}
+
+        internal virtual string ProxyKey
+        {
+            get
+            {
+                throw new NotImplementedException("This operation has not been implemented.");
+            }
+        }
 	}
 }
