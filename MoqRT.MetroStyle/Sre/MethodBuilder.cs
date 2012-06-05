@@ -3,16 +3,27 @@ using MoqRT.Reflection;
 
 namespace System.Reflection.Emit
 {
-    public class MethodBuilder : MethodBaseBuilder, IMethodInfo
+    public class MethodBuilder : MethodBaseBuilder, IMethodInfo, IMethodInfoOwner
     {
+        internal MethodBuilder(object inner)
+            : base(inner)
+        {
+        }
+
         public Type ReturnType
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.GetProperty<Type>();
+            }
         }
 
         public bool ContainsGenericParameters
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.GetProperty<bool>();
+            }
         }
 
         public IMethodInfo GetGenericMethodDefinition()
@@ -27,7 +38,7 @@ namespace System.Reflection.Emit
 
         public bool IsGetType()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("This operation has not been implemented.");
         }
 
         public bool IsMemberwiseClone()
@@ -87,12 +98,15 @@ namespace System.Reflection.Emit
 
         internal void SetReturnType(Type returnType)
         {
-            throw new NotImplementedException();
+            this.Invoke("SetReturnType", returnType);
         }
 
-        internal void SetSignature(Type returnType, object p1, object p2, Type[] parameters, object p3, object p4)
+        internal void SetSignature(Type returnType, Type[] rtrcm, Type[] rtocm, Type[] parameterTypes, 
+            Type[][] ptrcm, Type[][] ptocm)
         {
-            throw new NotImplementedException();
+            //this.Invoke("SetSignature", new Type[] { typeof(Type), typeof(Type[]), typeof(Type[]), typeof(Type[][]), 
+            //    typeof(Type[][]) }, returnType, rtrcm, rtocm, parameterTypes, ptrcm, ptocm);
+            this.Invoke("SetSignature", returnType, rtrcm, rtocm, parameterTypes, ptrcm, ptocm);
         }
 
         internal IMethodInfo AsIMethodInfo()
@@ -104,7 +118,18 @@ namespace System.Reflection.Emit
         {
             get
             {
-                throw new NotImplementedException("This operation has not been implemented.");
+                return new ApplyGenArgs((names) =>
+                {
+                    throw new NotImplementedException("This operation has not been implemented.");
+                });
+            }
+        }
+
+        MethodInfo IMethodInfoOwner.MethodInfo
+        {
+            get
+            {
+                return (MethodInfo)this.Inner;
             }
         }
     }

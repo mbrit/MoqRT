@@ -1,13 +1,17 @@
-﻿namespace System.Reflection.Emit
+﻿using Moq.Reflection.Emit;
+
+namespace System.Reflection.Emit
 {
-    
-    
-    // Dynamically created for MoqRT - 04-Jun-2012
-    public class ParameterBuilder
+    public class ParameterBuilder : EmitWrapper
     {
+        internal ParameterBuilder(object inner)
+            : base(inner)
+        {
+        }
+
         internal void SetCustomAttribute(CustomAttributeBuilder attribute)
         {
-            throw new NotImplementedException();
+            this.Invoke("SetCustomAttribute", attribute.Inner);
         }
     }
 }

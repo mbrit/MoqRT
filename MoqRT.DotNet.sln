@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoqRT.DotNet.Tests", "MoqRT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoqRT.DotNet", "MoqRT.DotNet\MoqRT.DotNet.csproj", "{2E4DF86D-BA27-4C09-A10D-3AF5F18C2D88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoqRTPoc.Baker.Console", "MoqRT.Baker.Console\MoqRTPoc.Baker.Console.csproj", "{ADC9F930-3F2D-400D-B24E-A1BC6EEDE40D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -37,6 +39,16 @@ Global
 		{2E4DF86D-BA27-4C09-A10D-3AF5F18C2D88}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E4DF86D-BA27-4C09-A10D-3AF5F18C2D88}.Release|x64.ActiveCfg = Release|Any CPU
 		{2E4DF86D-BA27-4C09-A10D-3AF5F18C2D88}.Release|x86.ActiveCfg = Release|Any CPU
+		{ADC9F930-3F2D-400D-B24E-A1BC6EEDE40D}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{ADC9F930-3F2D-400D-B24E-A1BC6EEDE40D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADC9F930-3F2D-400D-B24E-A1BC6EEDE40D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADC9F930-3F2D-400D-B24E-A1BC6EEDE40D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{ADC9F930-3F2D-400D-B24E-A1BC6EEDE40D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ADC9F930-3F2D-400D-B24E-A1BC6EEDE40D}.Release|ARM.ActiveCfg = Release|Any CPU
+		{ADC9F930-3F2D-400D-B24E-A1BC6EEDE40D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADC9F930-3F2D-400D-B24E-A1BC6EEDE40D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADC9F930-3F2D-400D-B24E-A1BC6EEDE40D}.Release|x64.ActiveCfg = Release|Any CPU
+		{ADC9F930-3F2D-400D-B24E-A1BC6EEDE40D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

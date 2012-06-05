@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Moq</RootNamespace>
-    <AssemblyName>MoqRT</AssemblyName>
+    <AssemblyName>MoqRT.MetroStyle</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -23,6 +23,7 @@
     <DefineConstants>TRACE;DEBUG;NETFX_CORE, SILVERLIGHT</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -99,12 +100,8 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Baked\BakedMock.cs" />
-    <Compile Include="Baked\BakedSetup.cs" />
-    <Compile Include="Baking\BakingSetup.cs" />
-    <Compile Include="Baking\Transactions\BakingItem.cs" />
-    <Compile Include="Baking\Transactions\InstanceItem.cs" />
-    <Compile Include="Baking\Transactions\MethodItem.cs" />
+    <Compile Include="Baking\BakingController.cs" />
+    <Compile Include="Baking\DynamicModuleName.cs" />
     <Compile Include="Castle\AbstractInvocation.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -619,7 +616,6 @@
     <Compile Include="Driver\RealMockMetadata.cs" />
     <Compile Include="Driver\RealProxyGenerator.cs" />
     <Compile Include="Driver\RealWrapper.cs" />
-    <Compile Include="Baking\BakingController.cs" />
     <Compile Include="Original\!Special\ResourceManager.cs" />
     <Compile Include="Original\!Special\Resources.cs" />
     <Compile Include="Original\AdvancedMatcherAttribute.cs" />
@@ -734,33 +730,25 @@
     <Compile Include="Original\SetupKind.cs" />
     <Compile Include="Original\SetupSequentialContext.cs" />
     <Compile Include="Original\Times.cs" />
+    <Compile Include="Runtime\AppDomain.cs" />
     <Compile Include="Runtime\MissingMethodException.cs" />
-    <Compile Include="Runtime\SQLite.cs" />
-    <Compile Include="Baking\BakingMock.cs" />
     <Compile Include="Runtime\Trace.cs" />
     <Compile Include="Runtime\TypeExtender.cs" />
-    <Compile Include="Shim\Mock.Generic.cs" />
-    <Compile Include="Shim\Mock.cs" />
     <Compile Include="Runtime\MoqRTRuntime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shim\ObjectReferencedInBakingException.cs" />
-    <Compile Include="Sre\BuilderBase.cs" />
+    <Compile Include="Sre\AssemblyBuilder.cs" />
+    <Compile Include="Sre\AssemblyBuilderAccess.cs" />
+    <Compile Include="Sre\BuilderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Sre\ConstructorBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Sre\Interfaces\IConstructorBuilder.cs" />
-    <Compile Include="Sre\Interfaces\IEventInfo.cs" />
-    <Compile Include="Sre\Interfaces\IFieldInfo.cs" />
-    <Compile Include="Sre\Interfaces\IMemberInfo.cs" />
-    <Compile Include="Sre\Interfaces\IMethodBase.cs" />
-    <Compile Include="Sre\Interfaces\IMethodInfo.cs" />
-    <Compile Include="Sre\Interfaces\IParameterInfo.cs" />
-    <Compile Include="Sre\Interfaces\IPropertyInfo.cs" />
-    <Compile Include="Sre\Interfaces\IReflectableBase.cs" />
-    <Compile Include="Runtime\WinRTFixup.cs" />
-    <Compile Include="Sre\ParameterBuilder.cs" />
-    <Compile Include="Sre\EventBuilder.cs" />
     <Compile Include="Sre\CustomAttributeBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Sre\EmitWrapper.cs" />
+    <Compile Include="Sre\EventBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Sre\FieldBuilder.cs">
@@ -772,13 +760,34 @@
     <Compile Include="Sre\ILGenerator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Sre\LocalBuilder.cs" />
-    <Compile Include="Sre\MemberBuilder.cs" />
-    <Compile Include="Sre\MethodBaseBuilder.cs" />
+    <Compile Include="Sre\Interfaces\IConstructorBuilder.cs" />
+    <Compile Include="Sre\Interfaces\IEventInfo.cs" />
+    <Compile Include="Sre\Interfaces\IFieldInfo.cs" />
+    <Compile Include="Sre\Interfaces\IMemberInfo.cs" />
+    <Compile Include="Sre\Interfaces\IMethodBase.cs" />
+    <Compile Include="Sre\Interfaces\IMethodInfo.cs" />
+    <Compile Include="Sre\Wrappers\IMethodInfoOwner.cs" />
+    <Compile Include="Sre\Interfaces\IParameterInfo.cs" />
+    <Compile Include="Sre\Interfaces\IPropertyInfo.cs" />
+    <Compile Include="Sre\Interfaces\IReflectableBase.cs" />
+    <Compile Include="Runtime\WinRTFixup.cs" />
+    <Compile Include="Sre\Label.cs" />
+    <Compile Include="Sre\LocalBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Sre\MemberBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Sre\MethodBaseBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Sre\MethodBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Sre\ModuleBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Sre\ParameterBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Sre\PropertyBuilder.cs">

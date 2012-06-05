@@ -1,9 +1,12 @@
+using Moq.Reflection.Emit;
+
 namespace System.Reflection.Emit
 {
-    
-    
-    // Dynamically created for MoqRT - 04-Jun-2012
-    public class LocalBuilder : System.Reflection.LocalVariableInfo
+    public class LocalBuilder : EmitWrapper
     {
+        internal LocalBuilder(object inner)
+            : base(inner)
+        {
+        }
     }
 }

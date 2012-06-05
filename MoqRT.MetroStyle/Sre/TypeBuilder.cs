@@ -1,16 +1,22 @@
 ﻿using Castle.DynamicProxy.Generators.Emitters;
+using Moq.Reflection.Emit;
 using MoqRT;
 using MoqRT.Reflection;
 
 namespace System.Reflection.Emit
 {
-    public class TypeBuilder
+    public class TypeBuilder : EmitWrapper
     {
+        internal TypeBuilder(object inner)
+            : base(inner)
+        {
+        }
+
         public string Name
         {
             get
             {
-                throw new NotImplementedException("This operation has not been implemented.");
+                return this.GetProperty<string>();
             }
         }
 
@@ -18,7 +24,7 @@ namespace System.Reflection.Emit
         {
             get
             {
-                throw new NotImplementedException("This operation has not been implemented.");
+                return this.GetProperty<Type>();
             }
         }
 
@@ -26,7 +32,7 @@ namespace System.Reflection.Emit
         {
             get
             {
-                throw new NotImplementedException("This operation has not been implemented.");
+                return this.GetProperty<bool>();
             }
         }
 
@@ -34,7 +40,7 @@ namespace System.Reflection.Emit
         {
             get
             {
-                throw new NotImplementedException("This operation has not been implemented.");
+                return this.GetProperty<bool>();
             }
         }
 
@@ -42,7 +48,7 @@ namespace System.Reflection.Emit
         {
             get
             {
-                throw new NotImplementedException("This operation has not been implemented.");
+                return this.GetProperty<bool>();
             }
         }
 
@@ -50,13 +56,17 @@ namespace System.Reflection.Emit
         {
             get
             {
-                throw new NotImplementedException("This operation has not been implemented.");
+                return new ApplyGenArgs((names) =>
+                {
+                    var result = this.Invoke();
+                    throw new NotImplementedException("This operation has not been implemented.");
+                });
             }
         }
 
-        internal void DefineMethodOverride(MethodBuilder methodBuilder, IMethodInfo MethodToOverride)
+        internal void DefineMethodOverride(IMethodInfo method, IMethodInfo toOverride)
         {
-            throw new NotImplementedException();
+            this.Invoke("DefineMethodOverride", method.AsMethodInfo(), toOverride.AsMethodInfo());
         }
 
         internal void SetCustomAttribute(CustomAttributeBuilder attribute)
@@ -66,47 +76,60 @@ namespace System.Reflection.Emit
 
         internal Type CreateType()
         {
-            throw new NotImplementedException();
+            return (Type)this.Invoke();
         }
 
-        internal static void AddInterfaceImplementation(Type inter)
+        internal void AddInterfaceImplementation(Type inter)
         {
-            throw new NotImplementedException();
+            this.Invoke("AddInterfaceImplementation", inter);
         }
 
-        internal static void SetParent(Type baseType)
+        internal void SetParent(Type baseType)
         {
-            throw new NotImplementedException();
+            this.Invoke("SetParent", baseType);
         }
 
-        internal ConstructorBuilder DefineConstructor(MethodAttributes methodAttributes, CallingConventions callingConventions, Type[] args)
+        internal ConstructorBuilder DefineConstructor(MethodAttributes methodAttributes, CallingConventions callingConventions, 
+            Type[] args)
         {
-            throw new NotImplementedException();
+            var result = this.Invoke("DefineConstructor", new Type[] { typeof(MethodAttributes), typeof(CallingConventions), 
+                typeof(Type[]) }, methodAttributes, callingConventions, args);
+            return new ConstructorBuilder(result);
         }
 
         internal EventBuilder DefineEvent(string name, EventAttributes attributes, Type type)
         {
-            throw new NotImplementedException();
+            var result = this.Invoke("DefineEvent", new Type[] { typeof(string), typeof(EventAttributes), 
+                typeof(Type) }, name, attributes, type);
+            return new EventBuilder(result);
         }
 
         internal MethodBuilder DefineMethod(string name, MethodAttributes attributes)
         {
-            throw new NotImplementedException();
+            var result = this.Invoke("DefineMethod", new Type[] { typeof(string), typeof(MethodAttributes) },
+                name, attributes);
+            return new MethodBuilder(result);
         }
 
         internal TypeBuilder DefineNestedType(string name, TypeAttributes attributes, Type baseType, Type[] interfaces)
         {
-            throw new NotImplementedException();
+            var result = this.Invoke("DefineNestedType", new Type[] { typeof(string), typeof(TypeAttributes), 
+                typeof(Type), typeof(Type[]) }, name, attributes, baseType, interfaces);
+            return new TypeBuilder(result);
         }
 
         internal FieldBuilder DefineField(string name, Type fieldType, FieldAttributes attributes)
         {
-            throw new NotImplementedException();
+            var result = this.Invoke("DefineField", new Type[] { typeof(string), typeof(Type), typeof(FieldAttributes) },
+                name, fieldType, attributes);
+            return new FieldBuilder(result);
         }
 
-        internal PropertyBuilder DefineProperty(string name, PropertyAttributes attributes, Type propertyType, object[] args)
+        internal PropertyBuilder DefineProperty(string name, PropertyAttributes attributes, Type propertyType, Type[] args)
         {
-            throw new NotImplementedException();
+            var result = this.Invoke("DefineProperty", new Type[] { typeof(string), typeof(PropertyAttributes), typeof(Type), 
+                typeof(Type[]) }, name, attributes, propertyType, args);
+            return new PropertyBuilder(result);
         }
 
         internal static ConstructorInfo GetConstructor(Type type, ConstructorInfo ctr)
@@ -121,7 +144,8 @@ namespace System.Reflection.Emit
 
         internal ConstructorBuilder DefineTypeInitializer()
         {
-            throw new NotImplementedException();
+            var result = this.Invoke("DefineTypeInitializer");
+            return new ConstructorBuilder(result);
         }
     }
 }

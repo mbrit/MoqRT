@@ -67,7 +67,7 @@ namespace Castle.DynamicProxy
 			var generator = new ClassProxyGenerator(scope, classToProxy) { Logger = logger };
 			var result = generator.GenerateCode(additionalInterfacesToProxy, options);
 
-            //scope.SaveAssembly();
+            OnProxyGenerated(result);
 
             return result;
 		}
@@ -81,7 +81,7 @@ namespace Castle.DynamicProxy
 			{ Logger = logger };
 			var result = generator.GetGeneratedType();
 
-            //scope.SaveAssembly();
+            OnProxyGenerated(result);
 
             return result;
 		}
@@ -96,7 +96,7 @@ namespace Castle.DynamicProxy
 			var generator = new InterfaceProxyWithTargetGenerator(scope, interfaceToProxy) { Logger = logger };
 			var result = generator.GenerateCode(targetType, additionalInterfacesToProxy, options);
 
-            //scope.SaveAssembly();
+            OnProxyGenerated(result);
 
             return result;
 		}
@@ -110,7 +110,7 @@ namespace Castle.DynamicProxy
 			var generator = new InterfaceProxyWithTargetInterfaceGenerator(scope, interfaceToProxy) { Logger = logger };
 			var result = generator.GenerateCode(interfaceToProxy, additionalInterfacesToProxy, options);
 
-            //scope.SaveAssembly();
+            OnProxyGenerated(result);
 
             return result;
 		}
@@ -124,10 +124,14 @@ namespace Castle.DynamicProxy
 			var generator = new InterfaceProxyWithoutTargetGenerator(scope, interfaceToProxy) { Logger = logger };
 			var result = generator.GenerateCode(typeof(object), additionalInterfacesToProxy, options);
 
-            //scope.SaveAssembly();
+            OnProxyGenerated(result);
 
             return result;
 		}
+
+        protected virtual void OnProxyGenerated(object proxy)
+        {
+        }
 
 		private void AssertValidType(Type target)
 		{

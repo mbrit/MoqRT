@@ -56,7 +56,7 @@ namespace Moq.Proxy
 {
 	internal class CastleProxyFactory : IProxyFactory
 	{
-		private static readonly ProxyGenerator generator = CreateProxyGenerator();
+		internal static readonly ProxyGenerator generator = CreateProxyGenerator();
 
 		[SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "By Design")]
 		static CastleProxyFactory()
@@ -103,8 +103,18 @@ namespace Moq.Proxy
 
 		private static ProxyGenerator CreateProxyGenerator()
 		{
-			return new ProxyGenerator(false);
-		}
+#if !NETFX_CORE
+            var builder = new DefaultProxyBuilder();
+#else
+            IProxyBuilder builder = null;
+            if(MoqRTRuntime.IsBaking)
+                builder = new PersistentProxyBuilder();
+            else
+                builder = new DefaultProxyBuilder();
+#endif
+
+            return new ProxyGenerator(builder);
+        }
 
         private class Interceptor : IInterceptor
 		{
@@ -156,5 +166,10 @@ namespace Moq.Proxy
 				this.invocation.SetArgumentValue(index, value);
 			}
 		}
+
+        internal static PersistentProxyBuilder GetPersistentBuilder()
+        {
+            return (PersistentProxyBuilder)generator.ProxyBuilder;
+        }
 	}
 }

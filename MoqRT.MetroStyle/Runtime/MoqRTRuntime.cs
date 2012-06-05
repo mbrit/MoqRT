@@ -4,10 +4,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Moq.Baking;
-using SQLite;
+using MoqRT.Baking;
 
-namespace Moq
+namespace MoqRT
 {
     public static class MoqRTRuntime
     {
@@ -18,6 +17,23 @@ namespace Moq
             get
             {
                 return !(Baker == null);
+            }
+        }
+
+        public static void InitializeBaking()
+        {
+            Baker = new BakingController();
+        }
+
+        public static void FinishBaking()
+        {
+            try
+            {
+                Baker.Dispose();
+            }
+            finally
+            {
+                Baker = null;
             }
         }
     }

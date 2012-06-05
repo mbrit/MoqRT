@@ -9,16 +9,24 @@ namespace System.Reflection.Emit
 {
     public abstract class MemberBuilder : BuilderBase, IMemberInfo
     {
+        protected MemberBuilder(object inner)
+            : base(inner)
+        {
+        }
+
         public string Name
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.GetProperty<string>();
+            }
         }
 
         public Type DeclaringType
         {
             get
             {
-                throw new NotImplementedException("This operation has not been implemented.");
+                return this.GetProperty<Type>();
             }
         }
 
@@ -26,7 +34,7 @@ namespace System.Reflection.Emit
         {
             get
             {
-                throw new NotImplementedException();
+                return this.GetProperty<bool>();
             }
         }
 
@@ -34,7 +42,7 @@ namespace System.Reflection.Emit
         {
             get
             {
-                throw new NotImplementedException("This operation has not been implemented.");
+                return this.GetProperty<bool>();
             }
         }
 
@@ -42,7 +50,7 @@ namespace System.Reflection.Emit
         {
             get
             {
-                throw new NotImplementedException("This operation has not been implemented.");
+                return this.GetProperty<bool>();
             }
         }
 
@@ -50,7 +58,7 @@ namespace System.Reflection.Emit
         {
             get
             {
-                throw new NotImplementedException("This operation has not been implemented.");
+                return this.GetProperty<bool>();
             }
         }
 
@@ -58,7 +66,7 @@ namespace System.Reflection.Emit
         {
             get
             {
-                throw new NotImplementedException("This operation has not been implemented.");
+                return this.GetProperty<bool>();
             }
         }
 
@@ -70,7 +78,7 @@ namespace System.Reflection.Emit
 
         public bool IsDefined(Type type)
         {
-            throw new NotImplementedException();
+            return (bool)this.Invoke("IsDefined", type);
         }
 
         public IEnumerable<object> GetCustomAttributes(bool inherit)
@@ -80,7 +88,9 @@ namespace System.Reflection.Emit
 
         public Type ReflectedType()
         {
-            throw new NotImplementedException();
+            // it's a property in the underlying member - this is to simulate
+            // the WinRT shim...
+            return this.GetProperty<Type>();
         }
 
         public string Key

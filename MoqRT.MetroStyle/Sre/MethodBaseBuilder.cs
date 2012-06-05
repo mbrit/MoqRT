@@ -11,6 +11,11 @@ namespace System.Reflection.Emit
     {
         private MethodImplAttributes Flags { get; set; }
 
+        protected MethodBaseBuilder(object inner)
+            : base(inner)
+        {
+        }
+
         public void SetImplementationFlags(MethodImplAttributes attrs)
         {
             this.Flags = attrs;
@@ -26,14 +31,16 @@ namespace System.Reflection.Emit
             return this.Flags;
         }
 
-        internal ParameterBuilder DefineParameter(int p1, ParameterAttributes parameterAttributes, string p2)
+        internal ParameterBuilder DefineParameter(int position, ParameterAttributes parameterAttributes, string name)
         {
-            throw new NotImplementedException();
+            var result = this.Invoke("DefineParameter", new Type[] { typeof(int), typeof(ParameterAttributes), 
+                typeof(string) }, position, parameterAttributes, name);
+            return new ParameterBuilder(result);
         }
 
-        internal void SetParameters(Type[] paramTypes)
+        internal void SetParameters(params Type[] paramTypes)
         {
-            throw new NotImplementedException();
+            this.Invoke("SetParameters", new Type[] { typeof(Type[]) }, new object[] { paramTypes });
         }
 
         public ParameterInfo[] GetParameters()
@@ -43,68 +50,74 @@ namespace System.Reflection.Emit
 
         public bool IsAbstract
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.GetProperty<bool>();
+            }
         }
 
         public bool IsGenericMethod
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.GetProperty<bool>();
+            }
         }
 
         public bool IsGenericMethodDefinition
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.GetProperty<bool>();
+            }
         }
 
         public bool IsFinal
         {
-            get { throw new NotImplementedException(); }
-        }
-
-        public new bool IsInternal
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public new bool IsFamily
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public new bool IsAssembly
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public new bool IsFamilyOrAssembly
-        {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.GetProperty<bool>();
+            }
         }
 
         public bool IsPrivate
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.GetProperty<bool>();
+            }
         }
 
         public bool IsPublic
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.GetProperty<bool>();
+            }
         }
 
         public bool IsVirtual
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.GetProperty<bool>();
+            }
         }
-
 
         public bool IsFamilyAndAssembly
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.GetProperty<bool>();
+            }
         }
 
         public bool IsHideBySig
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.GetProperty<bool>();
+            }
         }
     }
 }

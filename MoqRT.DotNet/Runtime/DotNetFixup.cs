@@ -209,5 +209,10 @@ namespace MoqRT
         {
             return member.ReflectedType;
         }
+
+        internal static Assembly Assembly(this ModuleBuilder module)
+        {
+            return module.Assembly;
+        }
     }
 }

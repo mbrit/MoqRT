@@ -65,14 +65,6 @@ namespace Castle.DynamicProxy
 #endif
 
 		/// <summary>
-		///   Initializes a new instance of the <see cref = "ProxyGenerator" /> class.
-		/// </summary>
-        public ProxyGenerator(bool save)
-            : this(new DefaultProxyBuilder(new ModuleScope(save)))
-        {
-        }
-
-		/// <summary>
 		///   Gets or sets the <see cref = "ILogger" /> that this <see cref = "ProxyGenerator" /> log to.
 		/// </summary>
 		public ILogger Logger

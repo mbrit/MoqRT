@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace MoqRT.Reflection
 {
     [Serializable]
-    internal class MethodInfoWrapper : MethodBaseReflectionWrapper<MethodInfo>, IMethodInfo
+    internal class MethodInfoWrapper : MethodBaseReflectionWrapper<MethodInfo>, IMethodInfo, IMethodInfoOwner
     {
         // only create via a factory! Castle depends on single instances of wrappers...
         internal MethodInfoWrapper(MethodInfo inner)
@@ -91,6 +91,14 @@ namespace MoqRT.Reflection
         public IMethodInfo GetBaseDefinition()
         {
             throw new NotImplementedException();
+        }
+
+        MethodInfo IMethodInfoOwner.MethodInfo
+        {
+            get
+            {
+                return (MethodInfo)this.Inner;
+            }
         }
     }
 }

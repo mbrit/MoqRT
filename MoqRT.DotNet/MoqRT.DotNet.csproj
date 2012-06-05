@@ -906,6 +906,9 @@
     <Compile Include="..\MoqRT.MetroStyle\Sre\Wrappers\FieldInfoWrapper.cs">
       <Link>Sre\Wrappers\FieldInfoWrapper.cs</Link>
     </Compile>
+    <Compile Include="..\MoqRT.MetroStyle\Sre\Wrappers\IMethodInfoOwner.cs">
+      <Link>Sre\Wrappers\IMethodInfoOwner.cs</Link>
+    </Compile>
     <Compile Include="..\MoqRT.MetroStyle\Sre\Wrappers\MemberInfoReflectionWrapper.cs">
       <Link>Sre\Wrappers\MemberInfoReflectionWrapper.cs</Link>
     </Compile>
@@ -932,6 +935,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runtime\DotNetFixup.cs" />
+    <Compile Include="Runtime\MoqRTRuntime.cs" />
     <Compile Include="Runtime\ReverseTypeExtender.cs" />
     <Compile Include="Runtime\TypeExtender.cs" />
   </ItemGroup>

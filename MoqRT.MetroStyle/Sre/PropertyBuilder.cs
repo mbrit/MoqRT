@@ -4,14 +4,25 @@ namespace System.Reflection.Emit
 {
     public class PropertyBuilder : MemberBuilder, IPropertyInfo
     {
+        internal PropertyBuilder(object inner)
+            : base(inner)
+        {
+        }
+
         public bool CanWrite
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.GetProperty<bool>();
+            }
         }
 
         public bool CanRead
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.GetProperty<bool>();
+            }
         }
 
         public IMethodInfo GetGetMethod(bool nonPublic)
@@ -31,7 +42,10 @@ namespace System.Reflection.Emit
 
         public Type PropertyType
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.GetProperty<Type>();
+            }
         }
 
         public object GetValue(object obj, params object[] index)
@@ -39,14 +53,14 @@ namespace System.Reflection.Emit
             throw new NotImplementedException();
         }
 
-        internal void SetSetMethod(MethodBuilder methodBuilder)
+        internal void SetSetMethod(MethodBuilder method)
         {
-            throw new NotImplementedException();
+            this.Invoke("SetSetMethod", method.Inner);
         }
 
-        internal void SetGetMethod(MethodBuilder methodBuilder)
+        internal void SetGetMethod(MethodBuilder method)
         {
-            throw new NotImplementedException();
+            this.Invoke("SetGetMethod", method.Inner);
         }
     }
 }

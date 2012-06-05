@@ -24,22 +24,34 @@ namespace MoqRT
 
         internal static MethodInfo AsMethodInfo(this IMethodInfo wrapper)
         {
-            throw new NotImplementedException("This operation has not been implemented.");
+            if (wrapper is IMethodInfoOwner)
+                return ((IMethodInfoOwner)wrapper).MethodInfo;
+            else
+                throw new NotSupportedException(string.Format("Cannot handle '{0}'.", wrapper.GetType()));
         }
 
         internal static FieldInfo AsFieldInfo(this IFieldInfo wrapper)
         {
-            throw new NotImplementedException("This operation has not been implemented.");
+            if (wrapper is FieldInfoWrapper)
+                return (FieldInfo)((FieldInfoWrapper)wrapper).Inner;
+            else
+                throw new NotSupportedException(string.Format("Cannot handle '{0}'.", wrapper.GetType()));
         }
 
         internal static PropertyInfo AsPropertyInfo(this IPropertyInfo wrapper)
         {
-            throw new NotImplementedException("This operation has not been implemented.");
+            if (wrapper is PropertyInfoWrapper)
+                return (PropertyInfo)((PropertyInfoWrapper)wrapper).Inner;
+            else
+                throw new NotSupportedException(string.Format("Cannot handle '{0}'.", wrapper.GetType()));
         }
 
         internal static ConstructorInfo AsConstructorInfo(this IConstructorInfo wrapper)
         {
-            throw new NotImplementedException("This operation has not been implemented.");
+            if (wrapper is ConstructorInfoWrapper)
+                return (ConstructorInfo)((ConstructorInfoWrapper)wrapper).Inner;
+            else
+                throw new NotSupportedException(string.Format("Cannot handle '{0}'.", wrapper.GetType()));
         }
 
         internal static TypeCode GetTypeCode(this Enum e)
@@ -93,7 +105,7 @@ namespace MoqRT
 
         internal static IConstructorInfo AsIConstructorInfo(this ConstructorInfo constructor)
         {
-            throw new NotImplementedException("This operation has not been implemented.");
+            return ReflectionWrapperFactory.Get<IConstructorInfo>(constructor);
         }
 
         internal static IEnumerable<IConstructorInfo> AsIConstructorInfos(this IEnumerable<ConstructorInfo> constructors)
@@ -106,7 +118,7 @@ namespace MoqRT
 
         internal static IMemberInfo AsIMemberInfo(this MemberInfo member)
         {
-            throw new NotImplementedException("This operation has not been implemented.");
+            return ReflectionWrapperFactory.Get<IMemberInfo>(member);
         }
 
         internal static IEnumerable<IMemberInfo> AsIMemberInfos(this IEnumerable<MemberInfo> members)

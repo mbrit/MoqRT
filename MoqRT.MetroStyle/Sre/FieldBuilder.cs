@@ -4,19 +4,24 @@ namespace System.Reflection.Emit
 {
     public class FieldBuilder : MemberBuilder, IFieldInfo
     {
+        internal FieldBuilder(object inner)
+            : base(inner)
+        {
+        }
+
         public Type FieldType
         {
-            get { throw new NotImplementedException(); }
+            get { return GetProperty<Type>(); }
         }
 
         public FieldAttributes Attributes
         {
-            get { throw new NotImplementedException(); }
+            get { return GetProperty<FieldAttributes>(); }
         }
 
         internal FieldInfo ToFieldInfo()
         {
-            throw new NotImplementedException();
+            return (FieldInfo)this.Inner;
         }
     }
 }

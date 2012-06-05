@@ -10,12 +10,13 @@ namespace System
     {
         internal static void Assert(bool p)
         {
-            throw new NotImplementedException();
+            Assert(p, "Failed.");
         }
 
-        internal static void Assert(bool p1, string p2)
+        internal static void Assert(bool p, string message)
         {
-            throw new NotImplementedException();
+            if (!(p))
+                throw new InvalidOperationException("Assertion failed: " + message);
         }
     }
 }

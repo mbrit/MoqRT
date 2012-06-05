@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoqRT.MetroStyle.Tests", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoqRT.MetroStyle", "MoqRT.MetroStyle\MoqRT.MetroStyle.csproj", "{F19A77E8-3866-4E6B-801F-B71FA5936716}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoqRT.MetroStyle.Runner", "MoqRT.MetroStyle.Runner\MoqRT.MetroStyle.Runner.csproj", "{2CB62CFA-688C-44CD-BC08-2F76C2798A89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -17,6 +19,16 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CB62CFA-688C-44CD-BC08-2F76C2798A89}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{2CB62CFA-688C-44CD-BC08-2F76C2798A89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB62CFA-688C-44CD-BC08-2F76C2798A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB62CFA-688C-44CD-BC08-2F76C2798A89}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2CB62CFA-688C-44CD-BC08-2F76C2798A89}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2CB62CFA-688C-44CD-BC08-2F76C2798A89}.Release|ARM.ActiveCfg = Release|Any CPU
+		{2CB62CFA-688C-44CD-BC08-2F76C2798A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB62CFA-688C-44CD-BC08-2F76C2798A89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CB62CFA-688C-44CD-BC08-2F76C2798A89}.Release|x64.ActiveCfg = Release|Any CPU
+		{2CB62CFA-688C-44CD-BC08-2F76C2798A89}.Release|x86.ActiveCfg = Release|Any CPU
 		{A361F9C6-FB9B-4226-96A0-3B948F58D5B7}.Debug|ARM.ActiveCfg = Debug|ARM
 		{A361F9C6-FB9B-4226-96A0-3B948F58D5B7}.Debug|ARM.Build.0 = Debug|ARM
 		{A361F9C6-FB9B-4226-96A0-3B948F58D5B7}.Debug|ARM.Deploy.0 = Debug|ARM

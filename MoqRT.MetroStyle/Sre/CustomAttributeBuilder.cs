@@ -1,9 +1,10 @@
-﻿using MoqRT;
+﻿using Moq.Reflection.Emit;
+using MoqRT;
 using MoqRT.Reflection;
 
 namespace System.Reflection.Emit
 {
-    public class CustomAttributeBuilder
+    public class CustomAttributeBuilder : EmitWrapper
     {
         public CustomAttributeBuilder(ConstructorInfo ctor, params object[] ctorArgs)
             : this(ctor.AsIConstructorInfo(), ctorArgs)
@@ -11,6 +12,7 @@ namespace System.Reflection.Emit
         }
 
         public CustomAttributeBuilder(IConstructorInfo ctor, params object[] ctorArgs)
+            : base(null)
         {
         }
 
@@ -22,6 +24,7 @@ namespace System.Reflection.Emit
 
         public CustomAttributeBuilder(IConstructorInfo ctor, object[] ctorArgs, IPropertyInfo[] properties, 
             object[] propertyValues, IFieldInfo[] fields, object[] fieldValues)
+            : base(null)
         {
         }
     }

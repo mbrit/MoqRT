@@ -1,10 +1,12 @@
 namespace System.Reflection.Emit
 {
-    
-    
-    // Dynamically created for MoqRT - 04-Jun-2012
-    public class EventBuilder
+    public class EventBuilder : MemberBuilder
     {
+        internal EventBuilder(object inner)
+            : base(inner)
+        {
+        }
+
         internal void SetAddOnMethod(MethodBuilder methodBuilder)
         {
             throw new NotImplementedException();
