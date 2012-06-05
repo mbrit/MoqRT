@@ -6,7 +6,7 @@ when executing TDD in Metro-style.
 
 The idea is that you create your mocks as normal, but rather than generating them on-the-fly they are
 "baked" into a proper assembly that you use in your project. It's exactly the same Moq that you're
-used to using, only compiled against the WinRT .NET Core project. Similarly, rather than using all of
+used to using, only compiled against the WinRT .NET Core profile. Similarly, rather than using all of
 Castle Core, just the Dynamic Proxy components hae been brought in and tweaked.
 
 This only works against the Visual Studio 2012 test runner. But that's OK as of the time of writing,
@@ -19,15 +19,16 @@ Getting started
 * You'll find separate Metro-style and .NET solutions. Use MoqRT.MetroStyle.dll in your Metro-style
 tests project.
 
-* Build and compile the project as normal.
+* Build and compile your test project as normal.
 
-* In the .NET project, run the MoqRT.DotNet.Baker.Client executable.
+* In the .NET project, run the `MoqRT.DotNet.Baker.Client` executable.
 
 * Browse to the assembly that you wish to use and click the Run button. This will load the assembly
-and look for TypeClass and TypeMethod declarations. 
+and look for `TypeClass` and `TypeMethod` declarations. 
 
 * When it finds them, it will run each method. Ultimately it will create an assembly called
-`MoqRT.Baked.dll` in a folder called `~\bin\Baking` in your project. 
+`MoqRT.Baked.dll` in a folder called `~\bin\Baking` in your project. (This is the file Moq used to make
+saved to disk. Moq doesn't save the assembly to disk.)
 
 * Reference `MoqRT.Baked.dll` from that folder into your project.
 
@@ -37,7 +38,7 @@ and look for TypeClass and TypeMethod declarations.
 folder and in the `AppX` folder of your project. 
 
 * It will also create a SQLite database fail called `MoqRT.Baked.dll.db`. This holds a register of the
-mocked types and their proxies.
+mocked types and their proxies and is required.
 
 Gotchas
 ===
