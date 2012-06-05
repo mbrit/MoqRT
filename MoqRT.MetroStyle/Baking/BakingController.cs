@@ -15,7 +15,7 @@ namespace MoqRT.Baking
     internal class BakingController : IDisposable
     {
         private string TestAssemblyPath { get; set; }
-        private string AppXPath { get; set; }
+        internal string AppxPath { get; set; }
         private string DatabasePath { get; set; }
 
         internal const string DatabaseName = "MoqRTBaking.db";
@@ -23,7 +23,7 @@ namespace MoqRT.Baking
         internal BakingController(string testAssembly, string appxPath)
         {
             this.TestAssemblyPath = testAssembly;
-            this.AppXPath = appxPath;
+            this.AppxPath = appxPath;
             this.DatabasePath = Path.Combine(appxPath, DatabaseName);
 
             // setup...

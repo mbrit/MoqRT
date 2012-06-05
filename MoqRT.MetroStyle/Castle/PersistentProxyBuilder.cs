@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.IO;
+using MoqRT;
+
 namespace Castle.DynamicProxy
 {
 #if !SILVERLIGHT || NETFX_CORE
@@ -26,7 +29,10 @@ namespace Castle.DynamicProxy
 		/// <summary>
 		///   Initializes a new instance of the <see cref = "PersistentProxyBuilder" /> class.
 		/// </summary>
-		public PersistentProxyBuilder() : base(new ModuleScope(true))
+		public PersistentProxyBuilder() :
+            base(new ModuleScope(true, false, ModuleScope.DEFAULT_ASSEMBLY_NAME, Path.Combine(MoqRTRuntime.Baker.AppxPath,
+                ModuleScope.DEFAULT_FILE_NAME), ModuleScope.DEFAULT_ASSEMBLY_NAME, Path.Combine(MoqRTRuntime.Baker.AppxPath,
+                ModuleScope.DEFAULT_FILE_NAME)))
 		{
 		}
 

@@ -59,7 +59,16 @@ namespace MoqRTPoc.Baker
                     foreach (var attr in type.GetCustomAttributes())
                     {
                         if (attr.GetType().Name == "TestClassAttribute") // fudge - easier than referencing the WinRT test framework...
-                            testInstances.Add(Activator.CreateInstance(type));
+                        {
+                            try
+                            {
+                                testInstances.Add(Activator.CreateInstance(type));
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
+                        }
                     }
                 }
 

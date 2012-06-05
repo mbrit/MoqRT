@@ -30,15 +30,15 @@ namespace MoqRT.Reflection
             get;
         }
 
-        bool IsPropertySetter();
+        //bool IsPropertySetter();
 
-        bool IsPropertyGetter();
+        //bool IsPropertyGetter();
 
-        bool IsDestructor();
+        //bool IsDestructor();
 
-        bool IsEventAttach();
+        //bool IsEventAttach();
 
-        bool IsEventDetach();
+        //bool IsEventDetach();
 
         IMethodInfo GetBaseDefinition();
     }

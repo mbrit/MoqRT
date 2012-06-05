@@ -58,39 +58,39 @@ namespace MoqRT.Reflection
             }
         }
 
-        public bool IsPropertySetter()
-        {
-            throw new NotImplementedException();
-        }
+        //public bool IsPropertySetter()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public bool IsPropertyGetter()
-        {
-            throw new NotImplementedException();
-        }
+        //public bool IsPropertyGetter()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public bool IsDestructor()
-        {
-            throw new NotImplementedException();
-        }
+        //public bool IsDestructor()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public bool IsEventAttach()
-        {
-            throw new NotImplementedException();
-        }
+        //public bool IsEventAttach()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public bool IsEventDetach()
-        {
-            throw new NotImplementedException();
-        }
+        //public bool IsEventDetach()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public bool IsAccessible()
-        {
-            throw new NotImplementedException("This operation has not been implemented.");
-        }
+        //public bool IsAccessible()
+        //{
+        //    throw new NotImplementedException("This operation has not been implemented.");
+        //}
 
         public IMethodInfo GetBaseDefinition()
         {
-            throw new NotImplementedException();
+            return this.Inner.GetBaseDefinition().AsIMethodInfo();
         }
 
         MethodInfo IMethodInfoOwner.MethodInfo

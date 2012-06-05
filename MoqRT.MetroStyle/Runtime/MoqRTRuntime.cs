@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -56,11 +57,15 @@ namespace MoqRT
             Baker = new BakingController(testAssembly, appxPath);
         }
 
-        public static void FinishBaking()
+        public static string FinishBaking()
         {
             try
             {
+                var path = Path.Combine(Baker.AppxPath, ModuleScope.DEFAULT_FILE_NAME); 
                 Baker.Dispose();
+
+                // return...
+                return path;
             }
             finally
             {
@@ -97,13 +102,12 @@ namespace MoqRT
                 {
                     var name = new AssemblyName()
                     {
-                        Name = "CastleDynProxy2"
+                        Name = Path.GetFileName(ModuleScope.DEFAULT_FILE_NAME)
                     };
                     _bakedAssembly = Assembly.Load(name);
                 }
                 return _bakedAssembly;
             }
         }
-
     }
 }

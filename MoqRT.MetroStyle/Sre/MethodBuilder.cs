@@ -1,4 +1,6 @@
-﻿using Castle.DynamicProxy.Generators.Emitters;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Castle.DynamicProxy.Generators.Emitters;
 using MoqRT.Reflection;
 
 namespace System.Reflection.Emit
@@ -120,7 +122,13 @@ namespace System.Reflection.Emit
             {
                 return new ApplyGenArgs((names) =>
                 {
-                    throw new NotImplementedException("This operation has not been implemented.");
+                    var results = this.Invoke("DefineGenericParameters", new object[] { names });
+
+                    // copy...
+                    var mapped = new List<GenericTypeParameterBuilder>();
+                    foreach (var result in (IEnumerable)results)
+                        mapped.Add(new GenericTypeParameterBuilder(result));
+                    return mapped.ToArray();
                 });
             }
         }

@@ -1,38 +1,45 @@
-﻿namespace System.Reflection.Emit
+﻿using Moq.Reflection.Emit;
+
+namespace System.Reflection.Emit
 {
-    public class GenericTypeParameterBuilder
+    public class GenericTypeParameterBuilder : EmitWrapper
     {
+        internal GenericTypeParameterBuilder(object inner)
+            : base(inner)
+        {
+        }
+
         public string Name
         {
             get
             {
-                throw new NotImplementedException("This operation has not been implemented.");
+                return this.GetProperty<string>();
             }
         }
 
         internal Type MakeArrayType()
         {
-            throw new NotImplementedException();
+            return (Type)this.Invoke("MakeArrayType", new Type[] { }, new object[] { });
         }
 
         internal Type MakeArrayType(int rank)
         {
-            throw new NotImplementedException();
+            return (Type)this.Invoke("MakeArrayType", new Type[] { typeof(int) }, new object[] { rank });
         }
 
         internal void SetGenericParameterAttributes(GenericParameterAttributes attributes)
         {
-            throw new NotImplementedException();
+            this.Invoke("SetGenericParameterAttributes", attributes);
         }
 
         internal void SetInterfaceConstraints(Type[] constraints)
         {
-            throw new NotImplementedException();
+            this.Invoke("SetInterfaceConstraints", new object[] { constraints });
         }
 
         internal void SetCustomAttribute(CustomAttributeBuilder attribute)
         {
-            throw new NotImplementedException();
+            this.Invoke("SetCustomAttribute", attribute.Inner);
         }
     }
 }

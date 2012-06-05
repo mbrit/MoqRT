@@ -817,6 +817,7 @@
     <Folder Include="Reflection\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Moq.snk" />
     <None Include="Original\ilmerge.exclude" />
     <None Include="Original\Includes\GenericTypeParameters.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -849,6 +850,12 @@
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Moq.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
