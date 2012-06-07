@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoqRT.Baking
+namespace MoqRT.Baking.Client
 {
-    internal interface IBakingPoke
+    internal interface ITreeItemNode
     {
-        void RunWorkItem(BakingController owner, WorkItem item);
+        void HandleCheckChanged();
     }
 }

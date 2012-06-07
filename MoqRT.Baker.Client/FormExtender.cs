@@ -13,5 +13,16 @@ namespace MoqRT.Baking.Client
         {
             MessageBox.Show(form, message, "WinRT Baker");
         }
+
+        internal static void SafeInvoke(this Form form, Action callback)
+        {
+            if (form.InvokeRequired)
+            {
+                var d = new Action(() => callback());
+                form.Invoke(d);
+            }
+            else
+                callback();
+        }
     }
 }

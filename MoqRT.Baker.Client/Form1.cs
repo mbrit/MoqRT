@@ -32,16 +32,40 @@ namespace MoqRT.Baking.Client
 
             // sub...
             this.Controller.LogMessage += Controller_LogMessage;
-            this.Controller.BakingStarted += Controller_BakingStarted;
+            this.Controller.WorkItemStarted += Controller_WorkItemStarted;
+            this.Controller.WorkItemFinished += Controller_WorkItemFinished;
+            this.Controller.ActiveProjectChanged += Controller_ActiveProjectChanged;
 
             // update...
             this.RefreshRunStop();
         }
 
-        void Controller_BakingStarted(object sender, EventArgs e)
+        void Controller_WorkItemFinished(object sender, EventArgs e)
+        {
+            // go...
+            this.SafeInvoke(() =>
+            {
+                this.buttonRefresh.Enabled = true;
+                this.buttonForceBaking.Enabled = true;
+            });
+        }
+
+        void Controller_ActiveProjectChanged(object sender, EventArgs e)
+        {
+            this.SafeInvoke(() => this.RefreshTree());
+        }
+
+        void Controller_WorkItemStarted(object sender, EventArgs e)
         {
             lock (_logLock)
                 this.LogItems.Clear();
+
+            // go...
+            this.SafeInvoke(() =>
+            {
+                this.buttonRefresh.Enabled = false;
+                this.buttonForceBaking.Enabled = false;
+            });
         }
 
         void Controller_LogMessage(object sender, LogEventArgs e)
@@ -65,6 +89,7 @@ namespace MoqRT.Baking.Client
             this.buttonRun.Enabled = !(Controller.IsRunning);
             this.buttonStop.Enabled = !(this.buttonRun.Enabled);
             this.buttonRefresh.Enabled = this.buttonStop.Enabled;
+            this.buttonForceBaking.Enabled = this.buttonStop.Enabled;
         }
 
         private void buttonBrowse_Click(object sender, EventArgs e)
@@ -113,7 +138,8 @@ namespace MoqRT.Baking.Client
                     return;
                 }
 
-                this.Controller.Run(assemblyPath, appxFolder, bakingFolder);
+                // run...
+                this.Controller.Run(new BakingSettings(assemblyPath, appxFolder, bakingFolder));
                 this.timerLog.Enabled = true;
             }
             catch (Exception ex)
@@ -159,7 +185,48 @@ namespace MoqRT.Baking.Client
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
-            this.Controller.Refresh();
+            this.Controller.RefreshScan();
+        }
+
+        private void RefreshTree()
+        {
+            // update..
+            this.treeProject.BeginUpdate();
+            try
+            {
+                this.treeProject.Nodes.Clear();
+                foreach (TestClass c in this.Controller.ActiveProject.Classes)
+                {
+                    var node = new TestClassTreeNode(c);
+                    this.treeProject.Nodes.Add(node);
+                }
+            }
+            finally
+            {
+                this.treeProject.EndUpdate();
+            }
+        }
+
+        private void treeProject_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            ((ITreeItemNode)e.Node).HandleCheckChanged();
+        }
+
+        private void buttonForceBaking_Click(object sender, EventArgs e)
+        {
+            this.Controller.ForceBaking();
+        }
+
+        private void linkCheckAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            foreach (TreeNode node in this.treeProject.Nodes)
+                node.Checked = true;
+        }
+
+        private void linkCheckNone_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            foreach (TreeNode node in this.treeProject.Nodes)
+                node.Checked = false;
         }
     }
 }

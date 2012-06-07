@@ -109,5 +109,15 @@ namespace MoqRT
                 return _bakedAssembly;
             }
         }
+
+        /// <summary>
+        /// Use this method in your tests to indicate that mock construction is finished
+        /// and that the rest of the run should not be executed.
+        /// </summary>
+        public static void StopIfBaking()
+        {
+            if (IsBaking)
+                throw new StopBakingException();
+        }
     }
 }

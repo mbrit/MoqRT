@@ -39,14 +39,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\BakingContext.cs" />
     <Compile Include="Controller\BakingController.cs" />
     <Compile Include="Controller\BakingPoke.cs" />
     <Compile Include="Controller\BakingRunner.cs" />
     <Compile Include="Controller\BakingSettings.cs" />
+    <Compile Include="Controller\BakingWorkItem.cs" />
     <Compile Include="Controller\IBakingPoke.cs" />
+    <Compile Include="Controller\ILog.cs" />
     <Compile Include="Controller\LogEventArgs.cs" />
+    <Compile Include="Controller\ScanWorkItem.cs" />
     <Compile Include="Controller\WorkItem.cs" />
     <Compile Include="Data\SQLiteHelper.cs" />
+    <Compile Include="Project\TestClass.cs" />
+    <Compile Include="Project\TestItem.cs" />
+    <Compile Include="Project\TestMethod.cs" />
+    <Compile Include="Project\TestProject.cs" />
+    <Compile Include="Project\TestSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

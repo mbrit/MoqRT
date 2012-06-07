@@ -100,6 +100,8 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Attributes\IgnoreBakingAttribute.cs" />
+    <Compile Include="Attributes\BakingSessionAttribute.cs" />
     <Compile Include="Baking\BakingController.cs" />
     <Compile Include="Baking\DynamicModuleName.cs" />
     <Compile Include="Castle\AbstractInvocation.cs">
@@ -734,6 +736,7 @@
     <Compile Include="Original\Times.cs" />
     <Compile Include="Runtime\AppDomain.cs" />
     <Compile Include="Runtime\MissingMethodException.cs" />
+    <Compile Include="Runtime\StopBakingException.cs" />
     <Compile Include="Runtime\Trace.cs" />
     <Compile Include="Runtime\TypeExtender.cs" />
     <Compile Include="Runtime\MoqRTRuntime.cs" />
@@ -847,6 +850,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Delegates1.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\sqlite3.dll" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

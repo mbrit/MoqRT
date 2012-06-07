@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoqRT.Baking
+namespace MoqRT
 {
-    internal interface IBakingPoke
+    public interface ILog
     {
-        void RunWorkItem(BakingController owner, WorkItem item);
+        void Log(string message);
+        void Log(string message, Exception ex);
     }
 }

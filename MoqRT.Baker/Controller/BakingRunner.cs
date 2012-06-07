@@ -47,13 +47,15 @@ namespace MoqRT.Baking
                             AppDomain domain = AppDomain.CreateDomain(item.Settings.AssemblyFilename);
                             var type = typeof(BakingPoke);
                             IBakingPoke poke = (IBakingPoke)domain.CreateInstanceAndUnwrap(type.Assembly.GetName().ToString(), type.FullName);
+                            this.Owner.HandleWorkItemStarted();
                             try
                             {
-                                poke.Bake(this.Owner, item.Settings);
+                                poke.RunWorkItem(this.Owner, item);
                             }
                             finally
                             {
                                 AppDomain.Unload(domain);
+                                this.Owner.HandleWorkItemFinished();
                             }
                         }
                         else
@@ -84,12 +86,12 @@ namespace MoqRT.Baking
             this.Owner.Log(message);
         }
 
-        internal void Enqueue(BakingSettings settings)
+        internal void EnqueueScan(BakingSettings settings)
         {
-            this.Enqueue(settings, DateTime.MinValue);
+            this.EnqueueScan(settings, DateTime.MinValue);
         }
 
-        internal void Enqueue(BakingSettings settings, DateTime dt)
+        internal void EnqueueScan(BakingSettings settings, DateTime dt)
         {
             var existing = this.WorkItems.Where(v => v.Settings.AssemblyPath == settings.AssemblyPath && 
                 v.AtOrAfter != DateTime.MinValue).FirstOrDefault();
@@ -100,9 +102,15 @@ namespace MoqRT.Baking
             }
             else
             {
-                this.WorkItems.Enqueue(new WorkItem(settings.Clone(), dt));
+                this.WorkItems.Enqueue(new ScanWorkItem(settings.Clone(), dt));
                 this.Waiter.Set();
             }
+        }
+
+        internal void EnqueueBaking(BakingSettings settings)
+        {
+            this.WorkItems.Enqueue(new BakingWorkItem(settings.Clone(), DateTime.MinValue));
+            this.Waiter.Set();
         }
     }
 }

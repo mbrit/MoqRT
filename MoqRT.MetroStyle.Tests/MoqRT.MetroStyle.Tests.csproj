@@ -113,6 +113,7 @@
     <Compile Include="Demo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="OtherDemo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

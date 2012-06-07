@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace MoqRT.Baking
 {
     [Serializable]
-    internal class BakingSettings
+    public class BakingSettings
     {
         internal string AssemblyPath { get; private set; }
         internal string AppxPath { get; private set; }

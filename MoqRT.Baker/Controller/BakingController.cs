@@ -7,40 +7,46 @@ using System.Threading.Tasks;
 
 namespace MoqRT.Baking
 {
-    public class BakingController : MarshalByRefObject
+    public class BakingController : MarshalByRefObject, ILog
     {
         public bool IsRunning { get; private set; }
         private BakingSettings LastSettings { get; set; }
         private Task BakingTask { get; set; }
         private BakingRunner Runner { get; set; }
         private FileSystemWatcher Watcher { get; set; }
+        private TestProject _activeProject;
 
         public event EventHandler<LogEventArgs> LogMessage;
+        public event EventHandler WorkItemStarted;
+        public event EventHandler WorkItemFinished;
+        public event EventHandler ScanningStarted;
+        public event EventHandler ScanningFinished;
         public event EventHandler BakingStarted;
         public event EventHandler BakingFinished;
+        public event EventHandler ActiveProjectChanged;
 
         public BakingController()
         {
             this.Runner = new BakingRunner(this);
         }
 
-        public void Run(string assemblyPath, string appxPath, string bakingPath)
+        public void Run(BakingSettings settings)
         {
             if (this.IsRunning)
                 throw new InvalidOperationException("Already running.");
 
             // if...
             DisposeWatcher();
-            this.Watcher = new FileSystemWatcher(Path.GetDirectoryName(assemblyPath), Path.GetFileName(assemblyPath));
+            this.Watcher = new FileSystemWatcher(Path.GetDirectoryName(settings.AssemblyPath), Path.GetFileName(settings.AssemblyPath));
             this.Watcher.Changed += Watcher_Changed;
             this.Watcher.EnableRaisingEvents = true;
 
             // create...
-            this.Log(string.Format("Starting monitoring of '{0}'...", assemblyPath));
+            this.Log(string.Format("Starting monitoring of '{0}'...", settings.AssemblyPath));
 
             // run...
-            this.LastSettings = new BakingSettings(assemblyPath, appxPath, bakingPath);
-            this.Runner.Enqueue(this.LastSettings);
+            this.LastSettings = settings.Clone();
+            this.Runner.EnqueueScan(this.LastSettings);
 
             // ok...
             this.IsRunning = true;
@@ -90,16 +96,16 @@ namespace MoqRT.Baking
             if (ok)
             {
                 this.Log("File change detected...");
-                this.RefreshLazy(DateTime.Now.AddSeconds(5));
+                this.RefreshScanLazy(DateTime.Now.AddSeconds(5));
             }
         }
 
-        internal void Log(string message)
+        public void Log(string message)
         {
             this.Log(message, null);
         }
 
-        internal void Log(string message, Exception ex)
+        public void Log(string message, Exception ex)
         {
             this.OnLogMessage(new LogEventArgs(message, ex));
         }
@@ -133,18 +139,93 @@ namespace MoqRT.Baking
                 this.BakingFinished(this, e);
         }
 
-        public void RefreshLazy(DateTime dt)
+        internal void HandleWorkItemStarted()
         {
-            if (LastSettings == null)
-                throw new InvalidOperationException("'LastSettings' is null.");
-            this.Runner.Enqueue(this.LastSettings, dt);
+            this.OnWorkItemStarted(EventArgs.Empty);
         }
 
-        public void Refresh()
+        protected virtual void OnWorkItemStarted(EventArgs e)
+        {
+            if (this.WorkItemStarted != null)
+                this.WorkItemStarted(this, e);
+        }
+
+        internal void HandleWorkItemFinished()
+        {
+            this.OnWorkItemFinished(EventArgs.Empty);
+        }
+
+        protected virtual void OnWorkItemFinished(EventArgs e)
+        {
+            if (this.WorkItemFinished != null)
+                this.WorkItemFinished(this, e);
+        }
+
+        internal void HandleScanningStarted()
+        {
+            this.OnScanningStarted(EventArgs.Empty);
+        }
+
+        protected virtual void OnScanningStarted(EventArgs e)
+        {
+            if (this.ScanningStarted != null)
+                this.ScanningStarted(this, e);
+        }
+
+        internal void HandleScanningFinished()
+        {
+            this.OnScanningFinished(EventArgs.Empty);
+        }
+
+        protected virtual void OnScanningFinished(EventArgs e)
+        {
+            if (this.ScanningFinished != null)
+                this.ScanningFinished(this, e);
+        }
+
+        public void RefreshScanLazy(DateTime dt)
         {
             if (LastSettings == null)
                 throw new InvalidOperationException("'LastSettings' is null.");
-            this.Runner.Enqueue(this.LastSettings);
+            this.Runner.EnqueueScan(this.LastSettings, dt);
+        }
+
+        public void RefreshScan()
+        {
+            if (LastSettings == null)
+                throw new InvalidOperationException("'LastSettings' is null.");
+            this.Runner.EnqueueScan(this.LastSettings);
+        }
+
+        protected void OnActiveProjectChanged(EventArgs e)
+        {
+            if (this.ActiveProjectChanged != null)
+                this.ActiveProjectChanged(this, e);
+        }
+
+        public TestProject ActiveProject
+        {
+            get
+            {
+                return _activeProject;
+            }
+            set
+            {
+                // patch...
+                if (_activeProject != null)
+                    value.PatchIncludes(_activeProject);
+
+                // update...
+                _activeProject = value;
+
+                // set...
+                this.OnActiveProjectChanged(EventArgs.Empty);
+            }
+        }
+
+        public void ForceBaking()
+        {
+            this.Runner.EnqueueBaking(this.LastSettings);
         }
     }
 }

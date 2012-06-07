@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MoqRT.Baking
 {
-    internal class WorkItem
+    [Serializable]
+    internal abstract class WorkItem
     {
         internal BakingSettings Settings { get; private set; }
         internal DateTime AtOrAfter { get; set; }
@@ -28,5 +29,6 @@ namespace MoqRT.Baking
             }
         }
 
+        internal abstract void Run(BakingContext context);
     }
 }

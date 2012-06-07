@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoqRT.Baking
+namespace Moq.Attributes
 {
-    internal interface IBakingPoke
+    [AttributeUsage(AttributeTargets.Class)]
+    public sealed class TestSessionAttribute : Attribute
     {
-        void RunWorkItem(BakingController owner, WorkItem item);
     }
 }
