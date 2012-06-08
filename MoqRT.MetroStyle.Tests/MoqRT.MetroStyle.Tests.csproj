@@ -109,6 +109,7 @@
     <SDKReference Include="TestPlatform, Version=11.0" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnotherDemo.cs" />
     <Compile Include="AssertHelper.cs" />
     <Compile Include="Demo.cs">
       <SubType>Code</SubType>
@@ -159,7 +160,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>..\..\..\moqrt.baker.console\bin\debug\moqrt.baker.console</PostBuildEvent>
+    <PostBuildEvent>..\..\..\moqrt.baker.console\bin\debug\moqrt.baker.console.exe</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

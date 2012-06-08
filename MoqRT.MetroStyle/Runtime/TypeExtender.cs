@@ -388,12 +388,46 @@ namespace System.Reflection
 
         public static InterfaceMapping GetInterfaceMap(this Type type, Type interfaceType)
         {
-            throw new NotImplementedException();
+            return type.GetTypeInfo().GetRuntimeInterfaceMap(interfaceType);
         }
 
         public static TypeCode GetTypeCode(this Type type)
         {
-            throw new NotImplementedException("This operation has not been implemented.");
+            if (type == null)
+                return TypeCode.Empty;
+
+            if (typeof(bool).IsAssignableFrom(type))
+                return TypeCode.Boolean;
+            else if (typeof(char).IsAssignableFrom(type))
+                return TypeCode.Char;
+            else if (typeof(sbyte).IsAssignableFrom(type))
+                return TypeCode.SByte;
+            else if (typeof(byte).IsAssignableFrom(type))
+                return TypeCode.Byte;
+            else if (typeof(short).IsAssignableFrom(type))
+                return TypeCode.Int16;
+            else if (typeof(ushort).IsAssignableFrom(type))
+                return TypeCode.UInt16;
+            else if (typeof(int).IsAssignableFrom(type))
+                return TypeCode.Int32;
+            else if (typeof(uint).IsAssignableFrom(type))
+                return TypeCode.UInt32;
+            else if (typeof(long).IsAssignableFrom(type))
+                return TypeCode.Int64;
+            else if (typeof(ulong).IsAssignableFrom(type))
+                return TypeCode.UInt64;
+            else if (typeof(float).IsAssignableFrom(type))
+                return TypeCode.Single;
+            else if (typeof(double).IsAssignableFrom(type))
+                return TypeCode.Double;
+            else if (typeof(decimal).IsAssignableFrom(type))
+                return TypeCode.Decimal;
+            else if (typeof(DateTime).IsAssignableFrom(type))
+                return TypeCode.DateTime;
+            else if (typeof(string).IsAssignableFrom(type))
+                return TypeCode.String;
+            else
+                return TypeCode.Object;
         }
 
         public static Type[] FindInterfaces(this Type type, Func<Type, object, bool> filter, object criteria)

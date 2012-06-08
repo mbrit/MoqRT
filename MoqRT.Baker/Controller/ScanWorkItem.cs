@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MoqRT.Baking
@@ -9,8 +10,8 @@ namespace MoqRT.Baking
     [Serializable]
     internal class ScanWorkItem : WorkItem
     {
-        internal ScanWorkItem(BakingSettings settings, DateTime atOrAfter)  
-            : base(settings, atOrAfter, null)
+        internal ScanWorkItem(BakingSettings settings, DateTime atOrAfter, ManualResetEvent waiter = null)
+            : base(settings, atOrAfter, waiter)
         {
         }
 

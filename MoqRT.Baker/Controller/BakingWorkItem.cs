@@ -11,7 +11,7 @@ using MoqRT.Logging;
 namespace MoqRT.Baking
 {
     [Serializable]
-    internal class BakingWorkItem : WorkItem
+    internal class BakingWorkItem : ScanWorkItem
     {
         private const string SignalFilename = "MoqRT.signal";
 
@@ -22,6 +22,9 @@ namespace MoqRT.Baking
 
         internal override void Run(BakingContext context)
         {
+            base.Run(context);
+
+            // next...
             context.Owner.HandleBakingStarted();
             this.Log("Starting baking process...");
             try
@@ -96,7 +99,7 @@ namespace MoqRT.Baking
                                     }
                                 }
                                 else
-                                    this.Log(string.Format("Ignoring method '{0}'...", c.Name));
+                                    this.Log(string.Format("Ignoring method '{0}'...", m.Name));
                             }
                         }
                     }
