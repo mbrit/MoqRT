@@ -4,18 +4,21 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using MoqRT.Logging;
 
 namespace MoqRT.Baking
 {
     [Serializable]
     public class TestProject : TestItem
     {
+        public string PackageId { get; private set; }
         public List<TestClass> Classes { get; private set; }
         public List<TestSession> Sessions { get; private set; }
 
-        internal TestProject(Assembly asm, ILog log)
+        internal TestProject(Assembly asm, string packageId)
             : base(asm.FullName)
         {
+            this.PackageId = packageId;
             this.Classes = new List<TestClass>();
             this.Sessions = new List<TestSession>();
 
@@ -32,8 +35,8 @@ namespace MoqRT.Baking
                 {
                     if (names.Contains("TestClassAttribute")) 
                     {
-                        log.Log(string.Format("Found test class '{0}'...", type.FullName));
-                        var testClass = new TestClass(type, log);
+                        this.Log(string.Format("Found test class '{0}'...", type.FullName));
+                        var testClass = new TestClass(type);
                         this.Classes.Add(testClass);
 
                         // if...

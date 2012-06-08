@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{38FB9E1F-8A8A-48FE-BCE9-43283956AFE1}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{0F9433BE-4D5F-4250-B6EC-6D52744F93E0}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MoqRT.Baking</RootNamespace>
-    <AssemblyName>MoqRT.Baker</AssemblyName>
+    <RootNamespace>MoqRT.Baker.Console</RootNamespace>
+    <AssemblyName>MoqRT.Baker.Console</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,40 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\BakingContext.cs" />
-    <Compile Include="Controller\BakingController.cs" />
-    <Compile Include="Controller\BakingEndPoint.cs" />
-    <Compile Include="Controller\BakingPoke.cs" />
-    <Compile Include="Controller\BakingRunner.cs" />
-    <Compile Include="Controller\BakingSettings.cs" />
-    <Compile Include="Controller\BakingWorkItem.cs" />
-    <Compile Include="Controller\IBakingPoke.cs" />
-    <Compile Include="Logging\DebugLogWriter.cs" />
-    <Compile Include="Logging\ILog.cs" />
-    <Compile Include="Controller\ScanWorkItem.cs" />
-    <Compile Include="Controller\WorkItem.cs" />
-    <Compile Include="Data\SQLiteHelper.cs" />
-    <Compile Include="Logging\ILoggable.cs" />
-    <Compile Include="Logging\ILoggableExtender.cs" />
-    <Compile Include="Logging\ILogWriter.cs" />
-    <Compile Include="Logging\Logger.cs" />
-    <Compile Include="Logging\PinnedLogDistributor.cs" />
-    <Compile Include="Project\TestClass.cs" />
-    <Compile Include="Project\TestItem.cs" />
-    <Compile Include="Project\TestMethod.cs" />
-    <Compile Include="Project\TestProject.cs" />
-    <Compile Include="Project\TestSession.cs" />
+    <Compile Include="EchoWriter.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MoqRT.DotNet\MoqRT.DotNet.csproj">
-      <Project>{2e4df86d-ba27-4c09-a10d-3af5f18c2d88}</Project>
-      <Name>MoqRT.DotNet</Name>
-    </ProjectReference>
+    <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Resources\sqlite3.dll" />
+    <ProjectReference Include="..\MoqRT.Baker\MoqRT.Baker.csproj">
+      <Project>{38fb9e1f-8a8a-48fe-bce9-43283956afe1}</Project>
+      <Name>MoqRT.Baker</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

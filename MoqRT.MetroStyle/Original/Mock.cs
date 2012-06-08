@@ -66,7 +66,11 @@ namespace Moq
 		{
 			this.ImplementedInterfaces = new List<Type>();
 			this.InnerMocks = new Dictionary<MethodInfo, Mock>();
-		}
+
+#if NETFX_CORE
+            MoqRTRuntime.MockInstantiated(this);
+#endif
+        }
 
         // @mbrit - 2012-06-02 - factory method, as opposed to new...
         public static Mock<T> Create<T>()

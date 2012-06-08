@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MoqRT.Logging;
 
 namespace MoqRT.Baking
 {
@@ -13,7 +14,7 @@ namespace MoqRT.Baking
         public TestMethod InitializeMethod { get; private set; }
         public TestMethod CleanupMethod { get; private set; }
 
-        internal TestClass(Type type, ILog log)
+        internal TestClass(Type type)
             : base(type.FullName)
         {
             this.Methods = new List<TestMethod>();
@@ -31,22 +32,22 @@ namespace MoqRT.Baking
                     // if...
                     if (names.Contains("TestMethodAttribute")) 
                     {
-                        log.Log(string.Format("Found test method '{0}'...", method.Name));
-                        this.Methods.Add(new TestMethod(method, log));
+                        this.Log(string.Format("Found test method '{0}'...", method.Name));
+                        this.Methods.Add(new TestMethod(method));
                     }
 
                     // if...
                     if (names.Contains("TestInitializeAttribute"))
                     {
-                        log.Log(string.Format("Found initialize method '{0}'...", method.Name));
-                        this.Methods.Add(new TestMethod(method, log));
+                        this.Log(string.Format("Found initialize method '{0}'...", method.Name));
+                        this.Methods.Add(new TestMethod(method));
                     }
 
                     // if...
                     if (names.Contains("TestCleanupAttribute"))
                     {
-                        log.Log(string.Format("Found cleanup method '{0}'...", method.Name));
-                        this.Methods.Add(new TestMethod(method, log));
+                        this.Log(string.Format("Found cleanup method '{0}'...", method.Name));
+                        this.Methods.Add(new TestMethod(method));
                     }
                 }
             }

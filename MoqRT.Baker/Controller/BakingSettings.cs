@@ -13,17 +13,19 @@ namespace MoqRT.Baking
         internal string AssemblyPath { get; private set; }
         internal string AppxPath { get; private set; }
         internal string BakingPath { get; private set; }
+        internal string PackageId { get; private set; }
 
-        public BakingSettings(string assemblyPath, string appxPath, string bakingPath)
+        public BakingSettings(string assemblyPath, string appxPath, string bakingPath, string packageID)
         {
             this.AssemblyPath = assemblyPath;
             this.AppxPath = appxPath;
             this.BakingPath = bakingPath;
+            this.PackageId = packageID;
         }
 
         internal BakingSettings Clone()
         {
-            return new BakingSettings(this.AssemblyPath, this.AppxPath, this.BakingPath);
+            return new BakingSettings(this.AssemblyPath, this.AppxPath, this.BakingPath, this.PackageId);
         }
 
         internal string AssemblyFolder

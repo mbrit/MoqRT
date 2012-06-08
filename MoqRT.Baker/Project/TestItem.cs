@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MoqRT.Logging;
 
 namespace MoqRT.Baking
 {
     [Serializable]
-    public abstract class TestItem
+    public abstract class TestItem : ILoggable
     {
         public string Name { get; private set; }
         public bool Include { get; set; }

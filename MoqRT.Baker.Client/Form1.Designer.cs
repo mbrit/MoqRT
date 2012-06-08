@@ -30,13 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonBrowseBaking = new System.Windows.Forms.Button();
+            this.buttonForceBaking = new System.Windows.Forms.Button();
             this.textBakingFolder = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.buttonStop = new System.Windows.Forms.Button();
             this.buttonRun = new System.Windows.Forms.Button();
-            this.buttonBrowseAppx = new System.Windows.Forms.Button();
             this.textAppxFolder = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonBrowse = new System.Windows.Forms.Button();
@@ -47,13 +46,14 @@
             this.timerLog = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.treeProject = new System.Windows.Forms.TreeView();
-            this.buttonForceBaking = new System.Windows.Forms.Button();
-            this.linkCheckAll = new System.Windows.Forms.LinkLabel();
             this.linkCheckNone = new System.Windows.Forms.LinkLabel();
+            this.linkCheckAll = new System.Windows.Forms.LinkLabel();
+            this.treeProject = new System.Windows.Forms.TreeView();
+            this.textPackage = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -66,14 +66,14 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.textPackage);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.buttonForceBaking);
-            this.groupBox1.Controls.Add(this.buttonBrowseBaking);
             this.groupBox1.Controls.Add(this.textBakingFolder);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.buttonRefresh);
             this.groupBox1.Controls.Add(this.buttonStop);
             this.groupBox1.Controls.Add(this.buttonRun);
-            this.groupBox1.Controls.Add(this.buttonBrowseAppx);
             this.groupBox1.Controls.Add(this.textAppxFolder);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.buttonBrowse);
@@ -81,20 +81,20 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(750, 136);
+            this.groupBox1.Size = new System.Drawing.Size(750, 148);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
             // 
-            // buttonBrowseBaking
+            // buttonForceBaking
             // 
-            this.buttonBrowseBaking.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBrowseBaking.Location = new System.Drawing.Point(669, 65);
-            this.buttonBrowseBaking.Name = "buttonBrowseBaking";
-            this.buttonBrowseBaking.Size = new System.Drawing.Size(75, 23);
-            this.buttonBrowseBaking.TabIndex = 11;
-            this.buttonBrowseBaking.Text = "Br&owse >>";
-            this.buttonBrowseBaking.UseVisualStyleBackColor = true;
+            this.buttonForceBaking.Location = new System.Drawing.Point(381, 117);
+            this.buttonForceBaking.Name = "buttonForceBaking";
+            this.buttonForceBaking.Size = new System.Drawing.Size(126, 23);
+            this.buttonForceBaking.TabIndex = 12;
+            this.buttonForceBaking.Text = "&Force Baking";
+            this.buttonForceBaking.UseVisualStyleBackColor = true;
+            this.buttonForceBaking.Click += new System.EventHandler(this.buttonForceBaking_Click);
             // 
             // textBakingFolder
             // 
@@ -102,6 +102,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBakingFolder.Location = new System.Drawing.Point(86, 65);
             this.textBakingFolder.Name = "textBakingFolder";
+            this.textBakingFolder.ReadOnly = true;
             this.textBakingFolder.Size = new System.Drawing.Size(577, 20);
             this.textBakingFolder.TabIndex = 10;
             // 
@@ -116,7 +117,7 @@
             // 
             // buttonRefresh
             // 
-            this.buttonRefresh.Location = new System.Drawing.Point(248, 98);
+            this.buttonRefresh.Location = new System.Drawing.Point(249, 117);
             this.buttonRefresh.Name = "buttonRefresh";
             this.buttonRefresh.Size = new System.Drawing.Size(126, 23);
             this.buttonRefresh.TabIndex = 8;
@@ -126,7 +127,7 @@
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(167, 98);
+            this.buttonStop.Location = new System.Drawing.Point(168, 117);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStop.TabIndex = 7;
@@ -135,7 +136,7 @@
             // 
             // buttonRun
             // 
-            this.buttonRun.Location = new System.Drawing.Point(86, 98);
+            this.buttonRun.Location = new System.Drawing.Point(87, 117);
             this.buttonRun.Name = "buttonRun";
             this.buttonRun.Size = new System.Drawing.Size(75, 23);
             this.buttonRun.TabIndex = 6;
@@ -143,22 +144,13 @@
             this.buttonRun.UseVisualStyleBackColor = true;
             this.buttonRun.Click += new System.EventHandler(this.buttonRun_Click);
             // 
-            // buttonBrowseAppx
-            // 
-            this.buttonBrowseAppx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBrowseAppx.Location = new System.Drawing.Point(669, 39);
-            this.buttonBrowseAppx.Name = "buttonBrowseAppx";
-            this.buttonBrowseAppx.Size = new System.Drawing.Size(75, 23);
-            this.buttonBrowseAppx.TabIndex = 5;
-            this.buttonBrowseAppx.Text = "Bro&wse >>";
-            this.buttonBrowseAppx.UseVisualStyleBackColor = true;
-            // 
             // textAppxFolder
             // 
             this.textAppxFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textAppxFolder.Location = new System.Drawing.Point(86, 39);
             this.textAppxFolder.Name = "textAppxFolder";
+            this.textAppxFolder.ReadOnly = true;
             this.textAppxFolder.Size = new System.Drawing.Size(577, 20);
             this.textAppxFolder.TabIndex = 4;
             // 
@@ -188,6 +180,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textAssembly.Location = new System.Drawing.Point(86, 13);
             this.textAssembly.Name = "textAssembly";
+            this.textAssembly.ReadOnly = true;
             this.textAssembly.Size = new System.Drawing.Size(577, 20);
             this.textAssembly.TabIndex = 1;
             // 
@@ -208,7 +201,7 @@
             this.groupBox2.Controls.Add(this.textLog);
             this.groupBox2.Location = new System.Drawing.Point(12, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(429, 387);
+            this.groupBox2.Size = new System.Drawing.Size(429, 374);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Output";
@@ -221,7 +214,7 @@
             this.textLog.Location = new System.Drawing.Point(9, 16);
             this.textLog.Name = "textLog";
             this.textLog.ReadOnly = true;
-            this.textLog.Size = new System.Drawing.Size(414, 362);
+            this.textLog.Size = new System.Drawing.Size(414, 349);
             this.textLog.TabIndex = 0;
             this.textLog.Text = "";
             // 
@@ -236,7 +229,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(774, 153);
+            this.panel1.Size = new System.Drawing.Size(774, 166);
             this.panel1.TabIndex = 2;
             // 
             // panel2
@@ -245,10 +238,19 @@
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 153);
+            this.panel2.Location = new System.Drawing.Point(0, 166);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(774, 393);
+            this.panel2.Size = new System.Drawing.Size(774, 380);
             this.panel2.TabIndex = 3;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.splitter1.Location = new System.Drawing.Point(444, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(6, 380);
+            this.splitter1.TabIndex = 4;
+            this.splitter1.TabStop = false;
             // 
             // panel3
             // 
@@ -256,7 +258,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(450, 393);
+            this.panel3.Size = new System.Drawing.Size(450, 380);
             this.panel3.TabIndex = 2;
             // 
             // panel4
@@ -267,39 +269,19 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel4.Location = new System.Drawing.Point(450, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(324, 393);
+            this.panel4.Size = new System.Drawing.Size(324, 380);
             this.panel4.TabIndex = 3;
             // 
-            // splitter1
+            // linkCheckNone
             // 
-            this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter1.Location = new System.Drawing.Point(444, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(6, 393);
-            this.splitter1.TabIndex = 4;
-            this.splitter1.TabStop = false;
-            // 
-            // treeProject
-            // 
-            this.treeProject.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeProject.CheckBoxes = true;
-            this.treeProject.Location = new System.Drawing.Point(6, 6);
-            this.treeProject.Name = "treeProject";
-            this.treeProject.Size = new System.Drawing.Size(306, 364);
-            this.treeProject.TabIndex = 0;
-            this.treeProject.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeProject_AfterCheck);
-            // 
-            // buttonForceBaking
-            // 
-            this.buttonForceBaking.Location = new System.Drawing.Point(380, 98);
-            this.buttonForceBaking.Name = "buttonForceBaking";
-            this.buttonForceBaking.Size = new System.Drawing.Size(126, 23);
-            this.buttonForceBaking.TabIndex = 12;
-            this.buttonForceBaking.Text = "&Force Baking";
-            this.buttonForceBaking.UseVisualStyleBackColor = true;
-            this.buttonForceBaking.Click += new System.EventHandler(this.buttonForceBaking_Click);
+            this.linkCheckNone.AutoSize = true;
+            this.linkCheckNone.Location = new System.Drawing.Point(62, 373);
+            this.linkCheckNone.Name = "linkCheckNone";
+            this.linkCheckNone.Size = new System.Drawing.Size(65, 13);
+            this.linkCheckNone.TabIndex = 2;
+            this.linkCheckNone.TabStop = true;
+            this.linkCheckNone.Text = "Check none";
+            this.linkCheckNone.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCheckNone_LinkClicked);
             // 
             // linkCheckAll
             // 
@@ -312,16 +294,36 @@
             this.linkCheckAll.Text = "Check all";
             this.linkCheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCheckAll_LinkClicked);
             // 
-            // linkCheckNone
+            // treeProject
             // 
-            this.linkCheckNone.AutoSize = true;
-            this.linkCheckNone.Location = new System.Drawing.Point(62, 373);
-            this.linkCheckNone.Name = "linkCheckNone";
-            this.linkCheckNone.Size = new System.Drawing.Size(65, 13);
-            this.linkCheckNone.TabIndex = 2;
-            this.linkCheckNone.TabStop = true;
-            this.linkCheckNone.Text = "Check none";
-            this.linkCheckNone.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCheckNone_LinkClicked);
+            this.treeProject.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeProject.CheckBoxes = true;
+            this.treeProject.Location = new System.Drawing.Point(6, 6);
+            this.treeProject.Name = "treeProject";
+            this.treeProject.Size = new System.Drawing.Size(306, 351);
+            this.treeProject.TabIndex = 0;
+            this.treeProject.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeProject_AfterCheck);
+            // 
+            // textPackage
+            // 
+            this.textPackage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textPackage.Location = new System.Drawing.Point(86, 91);
+            this.textPackage.Name = "textPackage";
+            this.textPackage.ReadOnly = true;
+            this.textPackage.Size = new System.Drawing.Size(577, 20);
+            this.textPackage.TabIndex = 14;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 93);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(64, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Pac&kage ID";
             // 
             // Form1
             // 
@@ -352,7 +354,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Button buttonRun;
-        private System.Windows.Forms.Button buttonBrowseAppx;
         private System.Windows.Forms.TextBox textAppxFolder;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonBrowse;
@@ -362,7 +363,6 @@
         private System.Windows.Forms.RichTextBox textLog;
         private System.Windows.Forms.Timer timerLog;
         private System.Windows.Forms.Button buttonRefresh;
-        private System.Windows.Forms.Button buttonBrowseBaking;
         private System.Windows.Forms.TextBox textBakingFolder;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
@@ -374,6 +374,8 @@
         private System.Windows.Forms.Button buttonForceBaking;
         private System.Windows.Forms.LinkLabel linkCheckNone;
         private System.Windows.Forms.LinkLabel linkCheckAll;
+        private System.Windows.Forms.TextBox textPackage;
+        private System.Windows.Forms.Label label4;
     }
 }
 

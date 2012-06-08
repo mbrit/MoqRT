@@ -4,10 +4,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using MoqRT.Logging;
 
 namespace MoqRT.Baking
 {
-    internal class BakingContext : ILog
+    internal class BakingContext : ILoggable
     {
         internal BakingController Owner { get; private set; }
         internal Type RuntimeType { get; private set; }

@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MoqRT.Baking.Data;
+using MoqRT.Logging;
 
 namespace MoqRT.Baking
 {
-    internal class BakingRunner
+    internal class BakingRunner : ILoggable
     {
         private BakingController Owner { get; set; }
         private Queue<WorkItem> WorkItems { get; set; }
@@ -47,10 +48,14 @@ namespace MoqRT.Baking
                             AppDomain domain = AppDomain.CreateDomain(item.Settings.AssemblyFilename);
                             var type = typeof(BakingPoke);
                             IBakingPoke poke = (IBakingPoke)domain.CreateInstanceAndUnwrap(type.Assembly.GetName().ToString(), type.FullName);
+                            poke.SetupLogging(new PinnedLogDistributor());
                             this.Owner.HandleWorkItemStarted();
                             try
                             {
                                 poke.RunWorkItem(this.Owner, item);
+
+                                if (item.Waiter != null)
+                                    item.Waiter.Set();
                             }
                             finally
                             {
@@ -76,14 +81,9 @@ namespace MoqRT.Baking
                 }
                 catch (Exception ex)
                 {
-                    this.Owner.Log("Unhandled baking exception: ", ex);
+                    this.Log("Unhandled baking exception: ", ex);
                 }
             }
-        }
-
-        private void Log(string message)
-        {
-            this.Owner.Log(message);
         }
 
         internal void EnqueueScan(BakingSettings settings)
@@ -107,9 +107,9 @@ namespace MoqRT.Baking
             }
         }
 
-        internal void EnqueueBaking(BakingSettings settings)
+        internal void EnqueueBaking(BakingSettings settings, ManualResetEvent waiter = null)
         {
-            this.WorkItems.Enqueue(new BakingWorkItem(settings.Clone(), DateTime.MinValue));
+            this.WorkItems.Enqueue(new BakingWorkItem(settings.Clone(), DateTime.MinValue, waiter));
             this.Waiter.Set();
         }
     }

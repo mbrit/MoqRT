@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Reflection;
+//using System.Reflection;
 using Moq;
 
 #if !NETFX_CORE
@@ -34,25 +34,6 @@ namespace Moq.Tests
 			//verify interaction
 			mock.VerifyAll();
 		}
-
-        [TestMethod]
-        public void FillingRemovesInventoryIfInStock2()
-        {
-            //setup - data
-            var order = new Order(TALISKER, 50);
-            var mock = Mock.Create<IWarehouse2>();
-
-            //setup - expectations
-            mock.Setup(x => x.HasInventory(TALISKER, 50)).Returns(true);
-
-            //exercise
-            order.Fill(mock.Object);
-
-            //verify state
-            Assert.IsTrue(order.IsFilled);
-            //verify interaction
-            mock.VerifyAll();
-        }
 
 		public void FillingDoesNotRemoveIfNotEnoughInStock()
 		{

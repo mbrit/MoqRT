@@ -10,6 +10,9 @@ using Moq.Database;
 using Moq.Proxy;
 using MoqRT.Baking;
 using SQLite;
+using Moq;
+using Windows.Networking.Sockets;
+using Windows.Networking;
 
 namespace MoqRT
 {
@@ -118,6 +121,10 @@ namespace MoqRT
         {
             if (IsBaking)
                 throw new StopBakingException();
+        }
+
+        internal static void MockInstantiated(Mock mock)
+        {
         }
     }
 }

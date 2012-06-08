@@ -9,6 +9,7 @@ using SQLite;
 using Moq;
 using Moq.Database;
 using System.Reflection;
+using Windows.Storage;
 
 namespace MoqRT.Baking
 {
@@ -17,14 +18,17 @@ namespace MoqRT.Baking
         private string TestAssemblyPath { get; set; }
         internal string AppxPath { get; set; }
         private string DatabasePath { get; set; }
+        private Guid Signal { get; set; }
 
         internal const string DatabaseName = "MoqRT.Baked.dll.db";
+        private const string SignalFilename = "MoqRT.signal";
 
         internal BakingController(string testAssembly, string appxPath, string bakingPath)
         {
             this.TestAssemblyPath = testAssembly;
             this.AppxPath = bakingPath;
             this.DatabasePath = Path.Combine(bakingPath, DatabaseName);
+            this.Signal = Guid.NewGuid();
 
             // setup...
             using (var conn = GetDatabase())

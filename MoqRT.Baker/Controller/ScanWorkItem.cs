@@ -10,7 +10,7 @@ namespace MoqRT.Baking
     internal class ScanWorkItem : WorkItem
     {
         internal ScanWorkItem(BakingSettings settings, DateTime atOrAfter)  
-            : base(settings, atOrAfter)
+            : base(settings, atOrAfter, null)
         {
         }
 
@@ -22,7 +22,7 @@ namespace MoqRT.Baking
                 context.Log(string.Format("Scanning test assembly '{0}'...", this.Settings.AssemblyFilename));
 
                 // create...
-                var project = new TestProject(context.TestAssembly, context);
+                var project = new TestProject(context.TestAssembly, Settings.PackageId);
                 context.Owner.ActiveProject = project;
 
                 //  ok...

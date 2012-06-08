@@ -8,22 +8,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using MoqRT.Logging;
 
 namespace MoqRT.Baking.Client
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, ILogWriter
     {
-        private BakingController Controller { get; set; }
         private List<string> LogItems { get; set; }
         private int LogHash { get; set; }
         private object _logLock = new object();
+        private string _packageId { get; set; }
 
         public Form1()
         {
             InitializeComponent();
 
             this.LogItems = new List<string>();
-            this.Controller = new BakingController();
+            Logger.RegisterLogWriter(this);
         }
 
         protected override void OnLoad(EventArgs e)
@@ -31,10 +33,10 @@ namespace MoqRT.Baking.Client
             base.OnLoad(e);
 
             // sub...
-            this.Controller.LogMessage += Controller_LogMessage;
-            this.Controller.WorkItemStarted += Controller_WorkItemStarted;
-            this.Controller.WorkItemFinished += Controller_WorkItemFinished;
-            this.Controller.ActiveProjectChanged += Controller_ActiveProjectChanged;
+            var controller = BakingController.Current;
+            controller.WorkItemStarted += Controller_WorkItemStarted;
+            controller.WorkItemFinished += Controller_WorkItemFinished;
+            controller.ActiveProjectChanged += Controller_ActiveProjectChanged;
 
             // update...
             this.RefreshRunStop();
@@ -68,11 +70,6 @@ namespace MoqRT.Baking.Client
             });
         }
 
-        void Controller_LogMessage(object sender, LogEventArgs e)
-        {
-            this.AddToLog(e.Message, e.Exception);
-        }
-
         private void AddToLog(string message, Exception ex)
         {
             lock (_logLock)
@@ -86,7 +83,7 @@ namespace MoqRT.Baking.Client
 
         private void RefreshRunStop()
         {
-            this.buttonRun.Enabled = !(Controller.IsRunning);
+            this.buttonRun.Enabled = !(BakingController.Current.IsRunning);
             this.buttonStop.Enabled = !(this.buttonRun.Enabled);
             this.buttonRefresh.Enabled = this.buttonStop.Enabled;
             this.buttonForceBaking.Enabled = this.buttonStop.Enabled;
@@ -111,8 +108,48 @@ namespace MoqRT.Baking.Client
                     if (!(Directory.Exists(baking)))
                         Directory.CreateDirectory(baking);
                     this.textBakingFolder.Text = baking;
+
+                    // package...
+                    UpdatePackageRef(dialog.FileName);
                 }
             }
+        }
+
+        private void UpdatePackageRef(string filePath)
+        {
+            string folder = Path.GetDirectoryName(filePath);
+            string packagePath = null;
+            while(true)
+            {
+                var walk = Path.Combine(folder, "Package.appxmanifest");
+                if (File.Exists(walk))
+                {
+                    packagePath = walk;
+                    break;
+                }
+
+                folder = Path.GetDirectoryName(folder);
+                if (!Directory.Exists(folder))
+                    break;
+            }
+
+            // set...
+            string packageId = null;
+            if (!(string.IsNullOrEmpty(packagePath)))
+            {
+                var doc = new XmlDocument();
+                doc.Load(packagePath);
+
+                // walk...
+                var manager = new XmlNamespaceManager(doc.NameTable);
+                manager.AddNamespace("a", "http://schemas.microsoft.com/appx/2010/manifest");
+                var identity = doc.SelectSingleNode("a:Package/a:Identity", manager);
+                if (identity != null)
+                    packageId = identity.Attributes["Name"].Value;
+            }
+
+            // set...
+            this.textPackage.Text = packageId;
         }
 
         private void buttonRun_Click(object sender, EventArgs e)
@@ -137,9 +174,10 @@ namespace MoqRT.Baking.Client
                     FormExtender.ShowMessage(this, "You must select an baking folder.");
                     return;
                 }
+                string packageId = this.textPackage.Text.Trim();
 
                 // run...
-                this.Controller.Run(new BakingSettings(assemblyPath, appxFolder, bakingFolder));
+                BakingController.Current.Run(new BakingSettings(assemblyPath, appxFolder, bakingFolder, packageId));
                 this.timerLog.Enabled = true;
             }
             catch (Exception ex)
@@ -185,7 +223,7 @@ namespace MoqRT.Baking.Client
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
-            this.Controller.RefreshScan();
+            BakingController.Current.RefreshScan();
         }
 
         private void RefreshTree()
@@ -195,7 +233,7 @@ namespace MoqRT.Baking.Client
             try
             {
                 this.treeProject.Nodes.Clear();
-                foreach (TestClass c in this.Controller.ActiveProject.Classes)
+                foreach (TestClass c in BakingController.Current.ActiveProject.Classes)
                 {
                     var node = new TestClassTreeNode(c);
                     this.treeProject.Nodes.Add(node);
@@ -214,7 +252,7 @@ namespace MoqRT.Baking.Client
 
         private void buttonForceBaking_Click(object sender, EventArgs e)
         {
-            this.Controller.ForceBaking();
+            BakingController.Current.ForceBaking();
         }
 
         private void linkCheckAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -227,6 +265,11 @@ namespace MoqRT.Baking.Client
         {
             foreach (TreeNode node in this.treeProject.Nodes)
                 node.Checked = false;
+        }
+
+        void ILogWriter.Write(string message, Exception ex)
+        {
+            this.AddToLog(message, ex);
         }
     }
 }

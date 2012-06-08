@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using MoqRT.Baking.Data;
+using MoqRT.Logging;
 
 namespace MoqRT.Baking
 {
@@ -65,5 +66,9 @@ namespace MoqRT.Baking
             }
         }
 
+        public void SetupLogging(ILogWriter writer)
+        {
+            Logger.RegisterLogWriter(writer);
+        }
     }
 }

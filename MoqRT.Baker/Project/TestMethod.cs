@@ -10,7 +10,7 @@ namespace MoqRT.Baking
     [Serializable]
     public class TestMethod : TestItem
     {
-        internal TestMethod(MethodInfo method, ILog log)
+        internal TestMethod(MethodInfo method)
             : base(method.Name)
         {
         }

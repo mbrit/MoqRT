@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting;
+using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Channels.Tcp;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using MoqRT.Logging;
 
 namespace MoqRT.Baking
 {
-    public class BakingController : MarshalByRefObject, ILog
+    public class BakingController : MarshalByRefObject, ILoggable
     {
         public bool IsRunning { get; private set; }
         private BakingSettings LastSettings { get; set; }
@@ -16,7 +21,8 @@ namespace MoqRT.Baking
         private FileSystemWatcher Watcher { get; set; }
         private TestProject _activeProject;
 
-        public event EventHandler<LogEventArgs> LogMessage;
+        public static BakingController Current { get; set; }
+
         public event EventHandler WorkItemStarted;
         public event EventHandler WorkItemFinished;
         public event EventHandler ScanningStarted;
@@ -25,21 +31,27 @@ namespace MoqRT.Baking
         public event EventHandler BakingFinished;
         public event EventHandler ActiveProjectChanged;
 
-        public BakingController()
+        private BakingController()
         {
             this.Runner = new BakingRunner(this);
+
+            // register remoting
+            RemotingConfiguration.CustomErrorsMode = CustomErrorsModes.Off;
+            var channel = new TcpServerChannel(BakingEndPoint.Port);
+            ChannelServices.RegisterChannel(channel, false);
+            var entry = new WellKnownServiceTypeEntry(typeof(BakingEndPoint), BakingEndPoint.ServiceUri, WellKnownObjectMode.SingleCall);
+            RemotingConfiguration.RegisterWellKnownServiceType(entry);
+        }
+
+        static BakingController()
+        {
+            Current = new BakingController();
         }
 
         public void Run(BakingSettings settings)
         {
             if (this.IsRunning)
                 throw new InvalidOperationException("Already running.");
-
-            // if...
-            DisposeWatcher();
-            this.Watcher = new FileSystemWatcher(Path.GetDirectoryName(settings.AssemblyPath), Path.GetFileName(settings.AssemblyPath));
-            this.Watcher.Changed += Watcher_Changed;
-            this.Watcher.EnableRaisingEvents = true;
 
             // create...
             this.Log(string.Format("Starting monitoring of '{0}'...", settings.AssemblyPath));
@@ -98,23 +110,6 @@ namespace MoqRT.Baking
                 this.Log("File change detected...");
                 this.RefreshScanLazy(DateTime.Now.AddSeconds(5));
             }
-        }
-
-        public void Log(string message)
-        {
-            this.Log(message, null);
-        }
-
-        public void Log(string message, Exception ex)
-        {
-            this.OnLogMessage(new LogEventArgs(message, ex));
-        }
-
-        protected virtual void OnLogMessage(LogEventArgs e)
-        {
-            // raise...
-            if (LogMessage != null)
-                LogMessage(this, e);
         }
 
         internal void HandleBakingStarted()
@@ -223,9 +218,9 @@ namespace MoqRT.Baking
             }
         }
 
-        public void ForceBaking()
+        public void ForceBaking(ManualResetEvent waiter = null)
         {
-            this.Runner.EnqueueBaking(this.LastSettings);
+            this.Runner.EnqueueBaking(this.LastSettings, waiter);
         }
     }
 }

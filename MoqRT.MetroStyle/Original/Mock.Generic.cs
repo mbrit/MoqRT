@@ -47,6 +47,7 @@ using Moq.Proxy;
 using Moq.Language;
 using Moq.Properties;
 using System.Text;
+using MoqRT;
 
 namespace Moq
 {
