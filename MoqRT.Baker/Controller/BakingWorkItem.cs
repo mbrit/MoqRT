@@ -107,21 +107,17 @@ namespace MoqRT.Baking
                 // finish...
                 context.Owner.Log("Finishing up...");
                 var finishMethod = context.RuntimeType.GetMethod("FinishBaking", BindingFlags.Static | BindingFlags.Public);
-                string bakedPath = (string)finishMethod.Invoke(null, null);
-                context.Owner.Log("Baking process complete.");
+                finishMethod.Invoke(null, null);
 
-                //// copy...
-                //var finalPath = Path.Combine(this.Settings.AppxPath, this.Settings.AssemblyFilename);
-                //OptimisticDelete(finalPath);
-                //File.Copy(bakedPath, finalPath);
-                //context.Owner.Log("Final target assembly: " + this.Settings.AppxPath);
-
+                // move the database...
                 const string databaseName = "MoqRT.Baked.dll.db";
                 var dbPath = Path.Combine(this.Settings.BakingPath, databaseName);
                 var finalDbPath = Path.Combine(this.Settings.AppxPath, databaseName);
                 OptimisticDelete(finalDbPath);
                 File.Copy(dbPath, finalDbPath);
-                context.Owner.Log("Final target tracking database: " + finalDbPath);
+
+                // log...
+                context.Owner.Log("Baking process complete.");
             }
             finally
             {
