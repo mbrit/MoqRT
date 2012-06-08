@@ -109,7 +109,6 @@
     <SDKReference Include="TestPlatform, Version=11.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnotherDemo.cs" />
     <Compile Include="AssertHelper.cs" />
     <Compile Include="Demo.cs">
       <SubType>Code</SubType>

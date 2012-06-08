@@ -11,7 +11,7 @@ using MoqRT.Logging;
 
 namespace MoqRT.Baking
 {
-    internal class BakingRunner : ILoggable
+    internal class BakingRunner : ILoggable, IDisposable
     {
         private BakingController Owner { get; set; }
         private Queue<WorkItem> WorkItems { get; set; }
@@ -111,6 +111,18 @@ namespace MoqRT.Baking
         {
             this.WorkItems.Enqueue(new BakingWorkItem(settings.Clone(), DateTime.MinValue, waiter));
             this.Waiter.Set();
+        }
+
+        public void Dispose()
+        {
+            try
+            {
+                this.Thread.Abort();
+            }
+            finally
+            {
+                this.Thread = null;
+            }
         }
     }
 }

@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textPackage = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.buttonForceBaking = new System.Windows.Forms.Button();
             this.textBakingFolder = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -52,8 +54,6 @@
             this.linkCheckNone = new System.Windows.Forms.LinkLabel();
             this.linkCheckAll = new System.Windows.Forms.LinkLabel();
             this.treeProject = new System.Windows.Forms.TreeView();
-            this.textPackage = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -85,6 +85,25 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
+            // 
+            // textPackage
+            // 
+            this.textPackage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textPackage.Location = new System.Drawing.Point(86, 91);
+            this.textPackage.Name = "textPackage";
+            this.textPackage.ReadOnly = true;
+            this.textPackage.Size = new System.Drawing.Size(577, 20);
+            this.textPackage.TabIndex = 14;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 93);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(64, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Pac&kage ID";
             // 
             // buttonForceBaking
             // 
@@ -274,8 +293,9 @@
             // 
             // linkCheckNone
             // 
+            this.linkCheckNone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.linkCheckNone.AutoSize = true;
-            this.linkCheckNone.Location = new System.Drawing.Point(62, 373);
+            this.linkCheckNone.Location = new System.Drawing.Point(62, 363);
             this.linkCheckNone.Name = "linkCheckNone";
             this.linkCheckNone.Size = new System.Drawing.Size(65, 13);
             this.linkCheckNone.TabIndex = 2;
@@ -285,8 +305,9 @@
             // 
             // linkCheckAll
             // 
+            this.linkCheckAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.linkCheckAll.AutoSize = true;
-            this.linkCheckAll.Location = new System.Drawing.Point(5, 373);
+            this.linkCheckAll.Location = new System.Drawing.Point(5, 363);
             this.linkCheckAll.Name = "linkCheckAll";
             this.linkCheckAll.Size = new System.Drawing.Size(51, 13);
             this.linkCheckAll.TabIndex = 1;
@@ -305,25 +326,6 @@
             this.treeProject.Size = new System.Drawing.Size(306, 351);
             this.treeProject.TabIndex = 0;
             this.treeProject.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeProject_AfterCheck);
-            // 
-            // textPackage
-            // 
-            this.textPackage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textPackage.Location = new System.Drawing.Point(86, 91);
-            this.textPackage.Name = "textPackage";
-            this.textPackage.ReadOnly = true;
-            this.textPackage.Size = new System.Drawing.Size(577, 20);
-            this.textPackage.TabIndex = 14;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 93);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 13);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Pac&kage ID";
             // 
             // Form1
             // 

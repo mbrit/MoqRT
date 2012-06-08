@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Moq.Attributes
+namespace MoqRT
 {
-    [AttributeUsage(AttributeTargets.Class)]
-    public sealed class TestSessionAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    public sealed class IgnoreBakingAttribute : Attribute
     {
     }
 }

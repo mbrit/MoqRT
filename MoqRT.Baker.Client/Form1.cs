@@ -100,9 +100,8 @@ namespace MoqRT.Baking.Client
 
                     var appx = Path.Combine(Path.GetDirectoryName(dialog.FileName), "AppX");
                     if (Directory.Exists(appx))
-                        this.textAppxFolder.Text = appx;
-                    else
-                        this.textAppxFolder.Text = string.Empty;
+                        Directory.CreateDirectory(appx);
+                    this.textAppxFolder.Text = appx;
 
                     var baking = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(dialog.FileName)), "Baking");
                     if (!(Directory.Exists(baking)))
@@ -162,18 +161,10 @@ namespace MoqRT.Baking.Client
                     FormExtender.ShowMessage(this, "You must select an assembly.");
                     return;
                 }
+
+                // get...
                 string appxFolder = this.textAppxFolder.Text.Trim();
-                if(string.IsNullOrEmpty(appxFolder))
-                {
-                    FormExtender.ShowMessage(this, "You must select an AppX folder.");
-                    return;
-                }
                 string bakingFolder = this.textBakingFolder.Text.Trim();
-                if (string.IsNullOrEmpty(bakingFolder))
-                {
-                    FormExtender.ShowMessage(this, "You must select an baking folder.");
-                    return;
-                }
                 string packageId = this.textPackage.Text.Trim();
 
                 // run...
@@ -270,6 +261,12 @@ namespace MoqRT.Baking.Client
         void ILogWriter.Write(string message, Exception ex)
         {
             this.AddToLog(message, ex);
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            BakingController.Current.Dispose();
         }
     }
 }

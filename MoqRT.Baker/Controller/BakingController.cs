@@ -12,7 +12,7 @@ using MoqRT.Logging;
 
 namespace MoqRT.Baking
 {
-    public class BakingController : MarshalByRefObject, ILoggable
+    public class BakingController : MarshalByRefObject, ILoggable, IDisposable
     {
         public bool IsRunning { get; private set; }
         private BakingSettings LastSettings { get; set; }
@@ -221,6 +221,19 @@ namespace MoqRT.Baking
         public void ForceBaking(ManualResetEvent waiter = null)
         {
             this.Runner.EnqueueBaking(this.LastSettings, waiter);
+        }
+
+        public void Dispose()
+        {
+            try
+            {
+                if(this.Runner != null)
+                    this.Runner.Dispose();
+            }
+            finally
+            {
+                this.Runner = null;
+            }
         }
     }
 }

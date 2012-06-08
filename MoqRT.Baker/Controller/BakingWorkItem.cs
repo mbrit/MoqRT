@@ -115,6 +115,8 @@ namespace MoqRT.Baking
                 // move the database...
                 const string databaseName = "MoqRT.Baked.dll.db";
                 var dbPath = Path.Combine(this.Settings.BakingPath, databaseName);
+                if (!(Directory.Exists(this.Settings.AppxPath)))
+                    Directory.CreateDirectory(this.Settings.AppxPath);
                 var finalDbPath = Path.Combine(this.Settings.AppxPath, databaseName);
                 OptimisticDelete(finalDbPath);
                 File.Copy(dbPath, finalDbPath);
